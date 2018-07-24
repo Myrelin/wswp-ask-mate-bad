@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question</title>
+</head>
+<body>
+
+    <h1>{{ data['title'] }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <td><h2>Vote number</h2></td>
+                <td><h2>View number</h2></td>
+                <td><h2>Message</h2></td>
+                <td><h2>Image</h2></td>
+            </tr>
+        </thead>
+        <tr>
+            <td>{{ data['vote_number']}}</td>
+            <td>{{ data['view_number']}}</td>
+            <td>{{ data['message']}}</td>
+            <td>{{ data['image']}}</td>
+        </tr>
+
+    </table>
+</body>
+</html>
