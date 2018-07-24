@@ -23,9 +23,15 @@ def display_question(question_id):
             'vote_number': details['vote_number'], 'title': details['title'], 'message': details['message'], 'image': details['image']}
     return render_template('question.html', data=data)
 
-@app.route('/add_question')
-def add_question():
-    return redirect('/')
+    @app.route('/add_question', methods=['GET', 'POST'])
+    def add_question():
+        page_title = "ADD QUESTION"
+        if request.methods == 'GET':
+            return render_template('form.html')
+        else:
+            data = request.form.to_dict()
+            print(data)
+            return redirect('/')
 
 
 if __name__ == '__main__':

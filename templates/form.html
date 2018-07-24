@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{{ page_title }}</title>
+</head>
+<body>
+    <h1>What do you want to ask?</h1>
+    <form method='POST' action={{ url_for('add_question') }}>
+        <div>
+            <label for=title>TITLE</label>
+            <input type="textarea" id="title" name="title">
+        </div>
+        <div>
+            <label for="message">Message</label>
+            <input type="textarea" id="message" name="message">
+        </div>
+        <div>
+            <label for="image">Image path</label>
+            <input type="textarea" id="image" name="image">
+        </div>
+        <div>
+            <input type="submit" value="Ask them tiger!">
+        </div>
+    </form>
+    
+</body>
+</html>
