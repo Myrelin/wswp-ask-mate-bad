@@ -11,10 +11,12 @@ def get_all_question():
         all_question = list(reader)
         return all_question
 
+
 def get_all_answer():
     with open(ANSWER_DATA_FILE_PATH) as csvfile:
         reader = csv.DictReader(csvfile)
         all_answer = list(reader)
         return all_answer
+
 
 get_all_question()
