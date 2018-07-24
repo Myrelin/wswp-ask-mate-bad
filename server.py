@@ -42,6 +42,12 @@ def add_question():
         return redirect('/')
 
 
+@app.route('/question/<question_id>/new_answer', methods=['GET','POST'])
+def add_new_answer(question_id):
+    return render_template('/new_answer.html')
+
+
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',
