@@ -6,10 +6,11 @@
 </head>
 <body>
 
-    <h1>{{ data['title'] }}</h1>
+    <h1>{{ data_question['title'] }}</h1>
     <table>
         <thead>
             <tr>
+                <td><h2>Submission Time</h2></td>
                 <td><h2>Vote number</h2></td>
                 <td><h2>View number</h2></td>
                 <td><h2>Message</h2></td>
@@ -17,12 +18,36 @@
             </tr>
         </thead>
         <tr>
-            <td>{{ data['vote_number']}}</td>
-            <td>{{ data['view_number']}}</td>
-            <td>{{ data['message']}}</td>
-            <td>{{ data['image']}}</td>
+            <td>{{ data_question['submission_time']}}</td>
+            <td>{{ data_question['vote_number']}}</td>
+            <td>{{ data_question['view_number']}}</td>
+            <td>{{ data_question['message']}}</td>
+            <td>{{ data_question['image']}}</td>
         </tr>
-
+    </table>
+    <br><br>
+    <h1>Answers</h1>
+    <table>
+        <thead>
+            <tr>
+                <td><h2>Submission Time</h2></td>
+                <td><h2>Vote number</h2></td>
+                <td><h2>View number</h2></td>
+                <td><h2>Message</h2></td>
+                <td><h2>Image</h2></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in answers_for_question %}
+                <tr>
+                    <td>{{ time.ctime(int(item['submission_time']))}}</td>
+                    <td>{{ item['vote_number']}}</td>
+                    <td>{{ item['view_number']}}</td>
+                    <td>{{ item['message']}}</td>
+                    <td>{{ item['image']}}</td>
+                </tr>
+            {% endfor%}
+        </tbody>
     </table>
 </body>
 </html>
