@@ -40,7 +40,7 @@
         <tbody>
             {% for item in answers_for_question %}
                 <tr>
-                    <td>{{ time.ctime(int(item['submission_time']))}}</td>
+                    <td>{{ item['submission_time']}}</td>
                     <td>{{ item['vote_number']}}</td>
                     <td>{{ item['view_number']}}</td>
                     <td>{{ item['message']}}</td>
