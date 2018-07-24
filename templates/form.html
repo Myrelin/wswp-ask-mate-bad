@@ -9,15 +9,15 @@
     <form method='POST' action={{ url_for('add_question') }}>
         <div>
             <label for=title>TITLE<br></label>
-            <input type="textarea" id="title" name="title">
+            <textarea id="title" name="title" rows="5" cols="20"></textarea>
         </div>
         <div>
             <label for="message">Message<br></label>
-            <input type="textarea" id="message" name="message">
+            <textarea id="message" name="message" rows="5" cols="20"></textarea>
         </div>
         <div>
             <label for="image">Image path<br></label>
-            <input type="textarea" id="image" name="image">
+            <textarea id="image" name="image" rows="5" cols="20"></textarea>
         </div>
         <div>
             <input type="submit" value="Ask them tiger!">
