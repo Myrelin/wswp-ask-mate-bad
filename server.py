@@ -23,7 +23,9 @@ def display_question(question_id):
             'vote_number': details['vote_number'], 'title': details['title'], 'message': details['message'], 'image': details['image']}
     return render_template('question.html', data=data)
 
-    # @app.route('/add_question')
+@app.route('/add_question')
+def add_question():
+    return redirect('/')
 
 
 if __name__ == '__main__':
