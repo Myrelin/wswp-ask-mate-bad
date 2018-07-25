@@ -8,10 +8,12 @@
     <h1>ASK MATE</h1>
     <table>
         <tr>
+            <th>Date</th>
             <th>Title</th>
         </tr>
         {% for question in questions %}
         <tr>
+            <td>{{ question['submission_time'] }}</td>
             <td><a href="/question/{{question['id']}}"> {{ question['title'] }} </a></td>
         </tr>
         {% endfor %}
