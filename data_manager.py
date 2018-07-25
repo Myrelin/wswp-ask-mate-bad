@@ -38,9 +38,11 @@ def get_all_question():
     questions = sorted(questions, key=lambda x: x['submission_time'], reverse=True)
     return questions
 
+
 def get_all_answers():
     answers = connection.get_all_answer()
     return answers
+
 
 def get_question_by_id(data, question_id):
     for item in data:
@@ -63,14 +65,15 @@ def get_answers_for_question(question_id):
             answers_for_question.append(item)
     return answers_for_question
 
+
 def delete_questions(question_id):
     questions = get_all_question()
     answers = get_all_answers()
-    for question in questions:
-        if question['id'] == question_id:
-            del question
-    for answer in answers:
-        if answer['question_id'] == question_id:
-            del answer
+    for i in range(len(questions)-1):
+        if questions[i]['id'] == question_id:
+            del questions[i]
+    for k in range(len(answers)):
+        if answers[k]['question_id'] == question_id:
+            del answers[k]
     connection.write_data(questions, DATA_HEADER_Q)
-    connection.write_data(answers, DATA_HEADER_A,False)
+    connection.write_data(answers, DATA_HEADER_A, False)
