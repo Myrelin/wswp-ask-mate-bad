@@ -48,7 +48,7 @@ def add_new_answer(question_id):
 @app.route("/question/<question_id>/delete", methods=['GET', 'POST'])
 def delete_question(question_id):
     if request.method == 'POST':
-        data_manager.delete_questions(request.form['question_id'])
+        data_manager.delete_questions(question_id)
     return redirect('/')
 
 
