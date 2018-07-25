@@ -10,6 +10,8 @@ app = Flask(__name__)
 @app.route('/list')
 def route_home():
     questions = data_manager.get_all_question()
+    for i in range(len(questions)):
+        questions[i] = data_manager.convert_timestamp(questions[i])
     return render_template('list.html', questions=questions)
 
 
