@@ -1,8 +1,9 @@
 import connection
 import time
 
+DATA_HEADER_Q = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
+DATA_HEADER_A = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
 
-def
 
 def add_question(data):
     questions = connection.get_all_question()
@@ -15,7 +16,7 @@ def add_question(data):
     record_to_add['submission_time'] = str(int(round(time.time())))
     record_to_add['view_number'] = '0'
     record_to_add['vote_number'] = '0'
-    connection.write_new_answer(record_to_add)
+    connection.write_new_answer(record_to_add, DATA_HEADER_Q)
 
 
 def add_answer(data):
@@ -27,10 +28,9 @@ def add_answer(data):
     record_to_add = data
     record_to_add['id'] = new_id
     record_to_add['submission_time'] = str(int(round(time.time())))
-    record_to_add['view_number'] = '0'
     record_to_add['vote_number'] = '0'
-    connection.write_new_answer(record_to_add)
-
+    record_to_add['question_id'] = data['question_id']
+    connection.write_new_answer(record_to_add, DATA_HEADER_A, False)
 
 
 def get_all_question():
