@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 
-import connection
-import time
+
 import data_manager
 
 app = Flask(__name__)
@@ -23,6 +22,7 @@ def display_question(question_id):
     return render_template('question.html', data_question=data_question, answers_for_question=answers_for_question)
 
 
+
 @app.route('/add_question', methods=['GET', 'POST'])
 def add_question():
     page_title = "Ask a QUESTION"
@@ -32,6 +32,15 @@ def add_question():
         return redirect('/')
     else:
         return render_template('form.html', page_title=page_title)
+
+@app.route('/question/<question_id>/new_answer', methods=['GET', 'POST'])
+def add_new_answer(question_id):
+    if request.method == 'POST':
+        data = request.form.to_dict()
+        data_manager.add_answer(data)
+        return redirect('/')
+    else:
+        return render_template('new_answer.html')
 
 
 if __name__ == '__main__':
