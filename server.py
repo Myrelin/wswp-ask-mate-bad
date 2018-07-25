@@ -10,34 +10,24 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/list')
 def route_home():
-    questions = connection.get_all_question()
-    questions = sorted(questions, key=lambda x: x['submission_time'], reverse=True)
+    questions = data_manager.get_all_question()
     return render_template('list.html', questions=questions)
 
 
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
 def display_question(question_id):
-    questions = connection.get_all_question()
-    for item in questions:
-        if item['id'] == str(question_id):
-            data_question = item
-    data_question['submission_time'] = time.ctime(int(data_question['submission_time']))
-
-    answers = connection.get_all_answer()
-    answers_for_question = []
-    for item in answers:
-        if item['question_id'] == str(question_id):
-            item['submission_time'] = time.ctime(int(item['submission_time']))
-            answers_for_question.append(item)
+    questions = data_manager.get_all_question()
+    data_question = data_manager.get_question_by_id(questions, question_id)
+    data_question = data_manager.convert_timestamp(data_question)
+    answers_for_question = data_manager.get_all_answer(question_id)
     return render_template('question.html', data_question=data_question, answers_for_question=answers_for_question)
 
 
 @app.route('/add_question', methods=['GET', 'POST'])
 def add_question():
-    page_title = "Ask QUESTION"
+    page_title = "Ask a QUESTION"
     if request.method == 'POST':
         data = request.form.to_dict()
-        print(data)
         data_manager.add_question(data)
         return redirect('/')
     else:
