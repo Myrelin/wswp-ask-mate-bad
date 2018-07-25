@@ -25,6 +25,11 @@
             <td>{{ data_question['image']}}</td>
         </tr>
     </table>
+    <form action="/question/<question_id>/delete" method="post">
+        <input type="hidden" id="question_id" name="question_id" value={{ data_question['id'] }}>
+        <input type="submit" value="delete">
+    </form>
+
     <br><br>
     <h1>Answers</h1>
     <table>
