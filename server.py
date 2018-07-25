@@ -18,7 +18,7 @@ def display_question(question_id):
     questions = data_manager.get_all_question()
     data_question = data_manager.get_question_by_id(questions, question_id)
     data_question = data_manager.convert_timestamp(data_question)
-    answers_for_question = data_manager.get_all_answer(question_id)
+    answers_for_question = data_manager.get_answers_for_question(question_id)
     return render_template('question.html', data_question=data_question, answers_for_question=answers_for_question)
 
 
@@ -42,6 +42,11 @@ def add_new_answer(question_id):
     else:
         return render_template('new_answer.html', question_id=question_id)
 
+@app.route("/question/<question_id>/delete", methods=['GET', 'POST'])
+def delete_question(question_id):
+    if request.method == 'POST':
+        data_manager.delete_questions(request.form['question_id'])
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(
