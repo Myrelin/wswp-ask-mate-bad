@@ -7,13 +7,16 @@
 <body>
     <h1>Add new answer</h1><br>
 
-    <form action="" method="POST">
-        <p><input id="message" name="message" minlength="10"></p>
-        <p><button id="add_answer" type="submit">Submit Answer</button></p>
-
-
-
-
+    <form action="/question/<question_id>/new_answer" method="POST">
+        <input type="hidden" id="question_id" name="question_id" value={{ question_id }} readonly>
+        <label for="message">New massage</label>
+        <input id="message" name="message" minlength="10">
+        <br>
+        <label for="image">Image path</label>
+        <input type="text" id="image" name="image">
+        <br>
+        <button id="add_answer" type="submit">Submit Answer</button>
+        
     </form>
 </body>
 </html>
