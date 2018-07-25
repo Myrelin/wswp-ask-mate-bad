@@ -42,11 +42,13 @@ def add_new_answer(question_id):
     else:
         return render_template('new_answer.html', question_id=question_id)
 
+
 @app.route("/question/<question_id>/delete", methods=['GET', 'POST'])
 def delete_question(question_id):
     if request.method == 'POST':
         data_manager.delete_questions(request.form['question_id'])
     return redirect('/')
+
 
 if __name__ == '__main__':
     app.run(
