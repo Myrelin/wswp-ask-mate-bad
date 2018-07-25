@@ -28,3 +28,17 @@ def write_new_answer(data, DATA_HEADER, question=True):
         with open(ANSWER_DATA_FILE_PATH, "a") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=DATA_HEADER)
             writer.writerow(data)
+
+def write_data(data, DATA_HEADER, question=True):
+    if question:
+        with open(QUESTION_DATA_FILE_PATH, "w") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=DATA_HEADER)
+            writer.writeheader()
+            for line in data:
+                writer.writerow(line)
+    else:
+        with open(ANSWER_DATA_FILE_PATH, "w") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=DATA_HEADER)
+            writer.writeheader()
+            for line in data:
+                writer.writerow(line)
