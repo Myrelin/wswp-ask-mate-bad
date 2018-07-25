@@ -22,7 +22,6 @@ def display_question(question_id):
     return render_template('question.html', data_question=data_question, answers_for_question=answers_for_question)
 
 
-
 @app.route('/add_question', methods=['GET', 'POST'])
 def add_question():
     page_title = "Ask a QUESTION"
@@ -33,6 +32,7 @@ def add_question():
     else:
         return render_template('form.html', page_title=page_title)
 
+
 @app.route('/question/<question_id>/new_answer', methods=['GET', 'POST'])
 def add_new_answer(question_id):
     if request.method == 'POST':
@@ -40,7 +40,7 @@ def add_new_answer(question_id):
         data_manager.add_answer(data)
         return redirect('/')
     else:
-        return render_template('new_answer.html')
+        return render_template('new_answer.html', question_id=question_id)
 
 
 if __name__ == '__main__':
