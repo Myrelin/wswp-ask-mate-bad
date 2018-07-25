@@ -7,7 +7,7 @@
 <body>
     <h1>Add new answer</h1><br>
 
-    <form action="/question/<question_id>/new_answer" method="POST">
+    <form action="/question/{{ question_id }}/new_answer" method="POST">
         <input type="hidden" id="question_id" name="question_id" value={{ question_id }} readonly>
         <p><label for="message">New massage</label>
         <input id="message" name="message" minlength="10"></p>
