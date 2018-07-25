@@ -35,8 +35,22 @@ def add_answer(data):
 
 def get_all_question():
     questions = connection.get_all_question()
-    questions = sorted(questions, key=lambda x: x['submission_time'], reverse=True)
     return questions
+
+
+def data_sort_by_atr(data, atr, ascend):
+    try:
+        for line in data:
+            line[atr] = int(line[atr])
+    except ValueError:
+        pass
+    if ascend:
+        data = sorted(data, key=lambda x: x[atr])
+    else:
+        data = sorted(data, key=lambda x: x[atr], reverse=True)
+    for line in data:
+        line[atr] = str(line[atr])
+    return data
 
 
 def get_all_answers():
@@ -69,7 +83,7 @@ def get_answers_for_question(question_id):
 def delete_questions(question_id):
     questions = get_all_question()
     answers = get_all_answers()
-    for i in range(len(questions)-1):
+    for i in range(len(questions)):
         if questions[i]['id'] == question_id:
             del questions[i]
     for k in range(len(answers)):
