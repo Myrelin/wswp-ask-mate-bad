@@ -29,6 +29,7 @@ def write_new_answer(data, DATA_HEADER, question=True):
             writer = csv.DictWriter(csvfile, fieldnames=DATA_HEADER)
             writer.writerow(data)
 
+
 def write_data(data, DATA_HEADER, question=True):
     if question:
         with open(QUESTION_DATA_FILE_PATH, "w") as csvfile:
