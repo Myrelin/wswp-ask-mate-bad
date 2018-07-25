@@ -32,6 +32,7 @@ def display_question(question_id):
     return render_template('question.html', data_question=data_question, answers_for_question=answers_for_question)
 
 
+
 @app.route('/add_question', methods=['GET', 'POST'])
 def add_question():
     page_title = "Ask QUESTION"
