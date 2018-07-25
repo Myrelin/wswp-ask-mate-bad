@@ -47,12 +47,14 @@
                     <td>{{ item['vote_number']}}</td>
                     <td>{{ item['message']}}</td>
                     <td>{{ item['image']}}</td>
+                    <td><button tybe="button" value="DELETE THIS ANSWER">DELETE THIS ANSWER</button></td>
                 </tr>
             {% endfor%}
         </tbody>
 
     </table>
-    <br><br>
-    <a href="/question/{{ data_question['id'] }}/new_answer">Answer</a>
+    <br>
+    <form action="/question/{{ data_question['id'] }}/new_answer", method="GET">
+        <input type="submit" value="Give an answer">
 </body>
 </html>
