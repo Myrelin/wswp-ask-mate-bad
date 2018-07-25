@@ -2,6 +2,8 @@ import connection
 import time
 
 
+def
+
 def add_question(data):
     questions = connection.get_all_question()
     try:
