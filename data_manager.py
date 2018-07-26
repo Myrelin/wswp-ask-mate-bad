@@ -105,7 +105,18 @@ def delete_answer(answer_id):
     for i in range(len(answers)):
         if answers[i]['id'] == answer_id:
             del answers[i]
+            break
     connection.write_data(answers, DATA_HEADER_A, False)
+
+
+def increase_view_number(question_id):
+    questions = get_all_question()
+    for i in range(len(questions)):
+        if questions[i]['id'] == question_id:
+            questions[i]['view_number'] = int(questions[i]['view_number'])
+            questions[i]['view_number'] += 1
+            questions[i]['view_number'] = str(questions[i]['view_number'])
+            connection.write_data(questions, DATA_HEADER_Q, True)
 
 
 def voting(id, question, direction):
