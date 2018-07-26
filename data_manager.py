@@ -91,3 +91,11 @@ def delete_questions(question_id):
             del answers[k]
     connection.write_data(questions, DATA_HEADER_Q)
     connection.write_data(answers, DATA_HEADER_A, False)
+
+
+def delete_answer(answer_id):
+    answers = get_all_answers()
+    for i in range(len(answers)):
+        if answers[i]['id'] == answer_id:
+            del answers[i]
+    connection.write_data(answers, DATA_HEADER_A, False)

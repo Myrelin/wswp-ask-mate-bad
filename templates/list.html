@@ -11,7 +11,7 @@
             <th><a href ="{{ url_for('order_by',atr='submission_time',direction='asc') }}">&uarr;</a>Date<a href="{{ url_for('order_by',atr='submission_time',direction='desc') }}">&darr;</a></th>
             <th><a href ="{{ url_for('order_by',atr='title',direction='asc') }}">&uarr;</a>Title<a href ="{{ url_for('order_by',atr='title',direction='desc') }}">&darr;</a></th>
             <th><a href ="{{ url_for('order_by',atr='view_number',direction='asc') }}">&uarr;</a>View number<a href ="{{ url_for('order_by',atr='view_number',direction='desc') }}">&darr;</a></th>
-            <th><a href ="{{ url_for('order_by',atr='vote_number',direction='asc') }}">&uarr;</a>Vote number<a href ="{{ url_for('order_by',atr='vote_number',direction='desc') }}">&darr;</a></th>
+            <th><a href ="{{ url_for('order_by',atr='vote_number',direction='asc',key='45') }}">&uarr;</a>Vote number<a href ="{{ url_for('order_by',atr='vote_number',direction='desc') }}">&darr;</a></th>
         </tr>
         {% for question in questions %}
         <tr>
