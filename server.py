@@ -74,6 +74,7 @@ def answer_delete(answer_id):
     data_manager.delete_answer(answer_id)
     return redirect('/question/{}'.format(question_id))
 
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',
