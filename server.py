@@ -65,6 +65,15 @@ def order_by(atr, direction):
     return render_template('list.html', questions=questions)
 
 
+@app.route('/answer/<answer_id>/delete')
+def answer_delete(answer_id):
+    answers = data_manager.get_all_answers()
+    for answer in answers:
+        if answer['id'] == answer_id:
+            question_id = answer['question_id']
+    data_manager.delete_answer(answer_id)
+    return redirect('/question/{}'.format(question_id))
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',
