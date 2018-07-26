@@ -65,6 +65,13 @@ def get_question_by_id(data, question_id):
     return data_question
 
 
+def get_answer_by_id(data, answer_id):
+    for item in data:
+        if item['id'] == str(answer_id):
+            data_answer = item
+    return data_answer
+
+
 def convert_timestamp(data):
     data['submission_time'] = time.ctime(int(data['submission_time']))
     return data
@@ -99,3 +106,48 @@ def delete_answer(answer_id):
         if answers[i]['id'] == answer_id:
             del answers[i]
     connection.write_data(answers, DATA_HEADER_A, False)
+
+
+def voting(id, question, direction):
+    if question:
+        questions = get_all_question()
+        question = get_question_by_id(questions, id)
+        if direction == 'up':
+            try:
+                question['vote_number'] = int(question['vote_number'])
+                question['vote_number'] += 1
+                question['vote_number'] = str(question['vote_number'])
+            except ValueError:
+                print('ERROR')
+        else:
+            try:
+                question['vote_number'] = int(question['vote_number'])
+                question['vote_number'] -= 1
+                question['vote_number'] = str(question['vote_number'])
+            except ValueError:
+                print('ERROR')
+        for i in range(len(questions)):
+            if questions[i]['id'] == question['id']:
+                questions[i] = question
+        connection.write_data(questions, DATA_HEADER_Q, True)
+    else:
+        answers = get_all_answers()
+        answer = get_answer_by_id(answers, id)
+        if direction == 'up':
+            try:
+                answer['vote_number'] = int(answer['vote_number'])
+                answer['vote_number'] += 1
+                answer['vote_number'] = str(answer['vote_number'])
+            except ValueError:
+                print('ERROR')
+        else:
+            try:
+                answer['vote_number'] = int(answer['vote_number'])
+                answer['vote_number'] -= 1
+                answer['vote_number'] = str(answer['vote_number'])
+            except ValueError:
+                print('ERROR')
+        for k in range(len(answers)):
+            if answers[k]['id'] == answer['id']:
+                answers[k] == answer
+        connection.write_data(answers, DATA_HEADER_A, False)
