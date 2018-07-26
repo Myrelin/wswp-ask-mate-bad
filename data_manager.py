@@ -93,6 +93,7 @@ def delete_questions(question_id):
     for i in range(len(questions)):
         if questions[i]['id'] == question_id:
             del questions[i]
+            break
     for k in range(len(answers)):
         if answers[k]['question_id'] == question_id:
             del answers[k]
