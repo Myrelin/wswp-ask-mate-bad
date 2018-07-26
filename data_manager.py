@@ -94,9 +94,12 @@ def delete_questions(question_id):
         if questions[i]['id'] == question_id:
             del questions[i]
             break
-    for k in range(len(answers)):
-        if answers[k]['question_id'] == question_id:
-            del answers[k]
+    answers_for_question = get_answers_for_question(question_id)
+    for answer in answers_for_question:
+        for i in range(len(answers)):
+            if answer == answers[i]:
+                del answers[i]
+                break
     connection.write_data(questions, DATA_HEADER_Q)
     connection.write_data(answers, DATA_HEADER_A, False)
 
