@@ -25,8 +25,7 @@
             <td>{{ data_question['image']}}</td>
         </tr>
     </table>
-    <form action="/question/<question_id>/delete" method="post">
-        <input type="hidden" id="question_id" name="question_id" value={{ data_question['id'] }}>
+    <form action="/question/{{ data_question['id'] }}/delete" method="post">
         <input type="submit" value="delete">
     </form>
 
@@ -48,12 +47,14 @@
                     <td>{{ item['vote_number']}}</td>
                     <td>{{ item['message']}}</td>
                     <td>{{ item['image']}}</td>
+                    <td><button tybe="button" value="DELETE THIS ANSWER">DELETE THIS ANSWER</button></td>
                 </tr>
             {% endfor%}
         </tbody>
 
     </table>
-    <br><br>
-    <a href="/question/{{ data_question['id'] }}/new_answer">Answer</a>
+    <br>
+    <form action="/question/{{ data_question['id'] }}/new_answer", method="GET">
+        <input type="submit" value="Give an answer">
 </body>
 </html>

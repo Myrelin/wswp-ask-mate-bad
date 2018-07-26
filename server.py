@@ -10,6 +10,9 @@ app = Flask(__name__)
 @app.route('/list')
 def route_home():
     questions = data_manager.get_all_question()
+    questions = data_manager.data_sort_by_atr(questions, 'submission_time', False)
+    for i in range(len(questions)):
+        questions[i] = data_manager.convert_timestamp(questions[i])
     return render_template('list.html', questions=questions)
 
 
@@ -42,11 +45,25 @@ def add_new_answer(question_id):
     else:
         return render_template('new_answer.html', question_id=question_id)
 
+
 @app.route("/question/<question_id>/delete", methods=['GET', 'POST'])
 def delete_question(question_id):
     if request.method == 'POST':
-        data_manager.delete_questions(request.form['question_id'])
+        data_manager.delete_questions(question_id)
     return redirect('/')
+
+
+@app.route('/list/<atr>/<direction>')
+def order_by(atr, direction):
+    questions = data_manager.get_all_question()
+    if direction == 'asc':
+        questions = data_manager.data_sort_by_atr(questions, atr, True)
+    else:
+        questions = data_manager.data_sort_by_atr(questions, atr, False)
+    for i in range(len(questions)):
+        questions[i] = data_manager.convert_timestamp(questions[i])
+    return render_template('list.html', questions=questions)
+
 
 if __name__ == '__main__':
     app.run(
