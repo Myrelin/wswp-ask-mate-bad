@@ -23,13 +23,22 @@
             <td>{{ data_question['view_number']}}</td>
             <td>{{ data_question['message']}}</td>
             <td>{{ data_question['image']}}</td>
+            <td>
+                <form action="/question/{{ data_question['id'] }}/vote/up/yes">
+                    <input type="submit" value="VOTE UP">
+                </form>
+            </td>
+            <td>
+                <form action='/question/{{ data_question['id'] }}/vote/dwn/yes'>
+                    <input type="submit" value="VOTE DOWN">
+                </form>
+            </td>
         </tr>
     </table>
     <form action="/question/{{ data_question['id'] }}/delete" method="post">
         <input type="submit" value="delete">
-    </form>
-
-    <br><br>
+    </form>    
+    <br>
     <h1>Answers</h1>
     <table>
         <thead>
@@ -48,8 +57,18 @@
                     <td>{{ item['message']}}</td>
                     <td>{{ item['image']}}</td>
                     <td><form action="/answer/{{ item['id'] }}/delete">
-                        <input type="submit" value="Delete this answer" />
+                        <input type="submit" value="Delete this answer">
                     </form></td>
+                    <td>
+                        <form action="/question/{{ item['id'] }}/vote/up/no">
+                            <input type="submit" value="VOTE UP">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/question/{{ item['id'] }}/vote/dwn/no">
+                            <input type="submit" value="VOTE DOWN">
+                        </form>
+                    </td>
                 </tr>
             {% endfor%}
         </tbody>
