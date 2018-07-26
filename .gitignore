@@ -103,4 +103,4 @@ ENV/
 # pycharm files
 .idea/
 
-sample_data/
+.sample_data/
