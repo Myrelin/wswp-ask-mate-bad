@@ -18,6 +18,7 @@ def route_home():
 
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
 def display_question(question_id):
+    data_manager.increase_view_number(question_id)
     questions = data_manager.get_all_question()
     data_question = data_manager.get_question_by_id(questions, question_id)
     data_question = data_manager.convert_timestamp(data_question)
