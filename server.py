@@ -41,7 +41,7 @@ def add_new_answer(question_id):
     if request.method == 'POST':
         data = request.form.to_dict()
         data_manager.add_answer(data)
-        return redirect('/')
+        return redirect('/question/{}'.format(question_id))
     else:
         return render_template('new_answer.html', question_id=question_id)
 
@@ -73,6 +73,18 @@ def answer_delete(answer_id):
             question_id = answer['question_id']
     data_manager.delete_answer(answer_id)
     return redirect('/question/{}'.format(question_id))
+
+
+@app.route('/question/<id>/vote/<direction>/<question>')
+def vote(id, direction, question):
+    if question == 'yes':
+        data_manager.voting(id, True, direction)
+        return redirect('/question/{}'.format(id))
+    else:
+        answers = data_manager.get_all_answers()
+        data_manager.voting(id, False, direction)
+        answer = data_manager.get_answer_by_id(answers, id)
+        return redirect('/question/{}'.format(answer['question_id']))
 
 
 if __name__ == '__main__':
