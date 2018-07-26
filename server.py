@@ -18,6 +18,7 @@ def route_home():
 
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
 def display_question(question_id):
+    data_manager.increase_view_number(question_id)
     questions = data_manager.get_all_question()
     data_question = data_manager.get_question_by_id(questions, question_id)
     data_question = data_manager.convert_timestamp(data_question)
@@ -41,7 +42,7 @@ def add_new_answer(question_id):
     if request.method == 'POST':
         data = request.form.to_dict()
         data_manager.add_answer(data)
-        return redirect('/')
+        return redirect('/question/{}'.format(question_id))
     else:
         return render_template('new_answer.html', question_id=question_id)
 
@@ -73,6 +74,18 @@ def answer_delete(answer_id):
             question_id = answer['question_id']
     data_manager.delete_answer(answer_id)
     return redirect('/question/{}'.format(question_id))
+
+
+@app.route('/question/<id>/vote/<direction>/<question>')
+def vote(id, direction, question):
+    if question == 'yes':
+        data_manager.voting(id, True, direction)
+        return redirect('/question/{}'.format(id))
+    else:
+        answers = data_manager.get_all_answers()
+        data_manager.voting(id, False, direction)
+        answer = data_manager.get_answer_by_id(answers, id)
+        return redirect('/question/{}'.format(answer['question_id']))
 
 
 if __name__ == '__main__':

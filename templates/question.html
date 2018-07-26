@@ -14,7 +14,6 @@
                 <td><h2>Vote number</h2></td>
                 <td><h2>View number</h2></td>
                 <td><h2>Message</h2></td>
-                <td><h2>Image</h2></td>
             </tr>
         </thead>
         <tr>
@@ -22,14 +21,22 @@
             <td>{{ data_question['vote_number']}}</td>
             <td>{{ data_question['view_number']}}</td>
             <td>{{ data_question['message']}}</td>
-            <td>{{ data_question['image']}}</td>
+            <td>
+                <form action="/question/{{ data_question['id'] }}/vote/up/yes">
+                    <input type="submit" value="VOTE UP">
+                </form>
+            </td>
+            <td>
+                <form action='/question/{{ data_question['id'] }}/vote/dwn/yes'>
+                    <input type="submit" value="VOTE DOWN">
+                </form>
+            </td>
         </tr>
     </table>
     <form action="/question/{{ data_question['id'] }}/delete" method="post">
         <input type="submit" value="delete">
-    </form>
-
-    <br><br>
+    </form>    
+    <br>
     <h1>Answers</h1>
     <table>
         <thead>
@@ -37,7 +44,6 @@
                 <td><h2>Submission Time</h2></td>
                 <td><h2>Vote number</h2></td>
                 <td><h2>Message</h2></td>
-                <td><h2>Image</h2></td>
             </tr>
         </thead>
         <tbody>
@@ -46,10 +52,19 @@
                     <td>{{ item['submission_time']}}</td>
                     <td>{{ item['vote_number']}}</td>
                     <td>{{ item['message']}}</td>
-                    <td>{{ item['image']}}</td>
                     <td><form action="/answer/{{ item['id'] }}/delete">
-                        <input type="submit" value="Delete this answer" />
+                        <input type="submit" value="Delete this answer">
                     </form></td>
+                    <td>
+                        <form action="/question/{{ item['id'] }}/vote/up/no">
+                            <input type="submit" value="VOTE UP">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/question/{{ item['id'] }}/vote/dwn/no">
+                            <input type="submit" value="VOTE DOWN">
+                        </form>
+                    </td>
                 </tr>
             {% endfor%}
         </tbody>
@@ -58,5 +73,9 @@
     <br>
     <form action="/question/{{ data_question['id'] }}/new_answer", method="GET">
         <input type="submit" value="Give an answer">
+    </form>
+    <form action="/">
+        <input type="submit" value="HOME">
+    </form>
 </body>
 </html>
