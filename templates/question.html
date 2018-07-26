@@ -47,7 +47,9 @@
                     <td>{{ item['vote_number']}}</td>
                     <td>{{ item['message']}}</td>
                     <td>{{ item['image']}}</td>
-                    <td><button tybe="button" value="DELETE THIS ANSWER">DELETE THIS ANSWER</button></td>
+                    <td><form action="/answer/{{ item['id'] }}/delete">
+                        <input type="submit" value="Delete this answer" />
+                    </form></td>
                 </tr>
             {% endfor%}
         </tbody>
