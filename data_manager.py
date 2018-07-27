@@ -91,9 +91,10 @@ def delete_questions(question_id):
     questions = get_all_question()
     answers = get_all_answers()
     answers_for_question = get_answers_for_question(question_id)
+
     for answer in answers_for_question:
         for i in range(len(answers)):
-            if answer == answers[i]:
+            if answer['id'] == answers[i]['id']:
                 del answers[i]
                 break
     for i in range(len(questions)):
