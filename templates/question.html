@@ -52,9 +52,11 @@
                     <td>{{ item['submission_time']}}</td>
                     <td>{{ item['vote_number']}}</td>
                     <td>{{ item['message']}}</td>
-                    <td><form action="/answer/{{ item['id'] }}/delete">
-                        <input type="submit" value="Delete this answer">
-                    </form></td>
+                    <td>
+                        <form action="/answer/{{ item['id'] }}/delete">
+                            <input type="submit" value="Delete this answer">
+                        </form>
+                    </td>
                     <td>
                         <form action="/question/{{ item['id'] }}/vote/up/no">
                             <input type="submit" value="VOTE UP">
