@@ -1,4 +1,30 @@
 id,submission_time,vote_number,question_id,message,image
-0,1493398154,4,0,"You need to use brackets: my_list = []",
-1,1493088154,35,0,"Look it up in the Python docs",
-2,1532519391,0,0,"Hy, I think you should check it on Google. It could be really helpful.",
+1,1493088154,46,0,Look it up in the Python docs,
+2,1532519391,21,0,"Hy, I think you should check it on Google. It could be really helpful.",
+3,1532673252,8,1,This is a test message,
+5,1532673342,0,2,This is a random answer,
+7,1532673357,3,2,This is also not a helpful answer,
+8,1532673399,4,2,testinggggggg,
+9,1532673457,-9,2,Still not helpful,
+10,1532673487,0,2,still test,
+11,1532674275,0,3,">>> d = {'key':'value'}
+>>> print(d)
+{'key': 'value'}
+>>> d['mynewkey'] = 'mynewvalue'
+>>> print(d)
+{'mynewkey': 'mynewvalue', 'key': 'value'}",
+12,1532674340,-1,3,Look it up on stackoverflow,
+13,1532674370,9,3,"data['a']=1  # Updates if 'a' exists, else adds 'a'
+# OR
+data.update({'a':1})
+# OR
+data.update(dict(a=1))
+# OR
+data.update(a=1)",
+14,1532674418,20,3,"To update this dict with a single new key and value, you can use the subscript notation (see Mappings here) that provides for item assignment:
+
+my_dict['new key'] = 'new value'
+my_dict is now:
+
+{'new key': 'new value'}
+",
