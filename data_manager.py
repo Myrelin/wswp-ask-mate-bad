@@ -33,8 +33,12 @@ def add_answer(data):
     connection.write_new_answer(record_to_add, DATA_HEADER_A, False)
 
 
-def get_all_question():
-    questions = connection.get_all_question()
+@connection.connection_handler
+def get_all_question(cursor):
+    cursor.execute("""
+                    SELECT * FROM question;
+                    """)
+    questions = cursor.fetchall()
     return questions
 
 
@@ -91,7 +95,6 @@ def delete_questions(question_id):
     questions = get_all_question()
     answers = get_all_answers()
     answers_for_question = get_answers_for_question(question_id)
-
     for answer in answers_for_question:
         for i in range(len(answers)):
             if answer['id'] == answers[i]['id']:
