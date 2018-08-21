@@ -57,8 +57,12 @@ def data_sort_by_atr(data, atr, ascend):
     return data
 
 
-def get_all_answers():
-    answers = connection.get_all_answer()
+@connection.connection_handler
+def get_all_answers(cursor):
+    answers = cursor.execute("""
+                    SELECT * FROM answer;
+                    """)
+    answers = cursor.fetchall()
     return answers
 
 
