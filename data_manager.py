@@ -1,5 +1,6 @@
 import connection
 import time
+from datetime import datetime
 
 DATA_HEADER_Q = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
 DATA_HEADER_A = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
@@ -78,10 +79,11 @@ def get_answer_by_id(cursor, answer_id):
     return answer
 
 
-def convert_timestamp(data):
-    data['submission_time'] = time.ctime(int(data['submission_time']))
-    return data
-
+def add_timestamp(cursor, table):
+    dt = datetime.now()
+    cursor.execute("""
+                      INSERT INTO table (
+                      submission_time) VALUES ({})""".format(dt))
 
 @connection.connection_handler
 def get_answers_for_question(cursor, question_id):
@@ -108,8 +110,8 @@ def delete_answer(cursor,answer_id):
 
     cursor.execute("""
                         DELETE FROM answers
-                        WHERE id = %d;
-                        """(answer_id))
+                        WHERE id = {};
+                        """.format(answer_id))
 
 
 @connection.connection_handler
