@@ -6,32 +6,23 @@ DATA_HEADER_Q = ['id', 'submission_time', 'view_number', 'vote_number', 'title',
 DATA_HEADER_A = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
 
 
-def add_question(data):
-    questions = connection.get_all_question()
-    try:
-        new_id = str(int(questions[-1]['id']) + 1)
-    except IndexError:
-        new_id = '1'
-    record_to_add = data
-    record_to_add['id'] = new_id
-    record_to_add['submission_time'] = str(int(round(time.time())))
-    record_to_add['view_number'] = '0'
-    record_to_add['vote_number'] = '0'
-    connection.write_new_answer(record_to_add, DATA_HEADER_Q)
+@connection.connection_handler
+def add_question(cursor, question):
+    cursor.execute("""INSERT INTO question (id, submission_time, vote_number, question_id, message, image) 
+        VALUES (%s %s %s %s %s %s )""", (
+    question['submission_time'], question['view_number'], question['vote_number'], question['title'], question['message'], question['image']))
+    cursor.execute("SELECT * FROM question")
+    result = cursor.fetchall()
+    return result
 
 
-def add_answer(data):
-    answers = connection.get_all_answer()
-    try:
-        new_id = str(int(answers[-1]['id']) + 1)
-    except IndexError:
-        new_id = '1'
-    record_to_add = data
-    record_to_add['id'] = new_id
-    record_to_add['submission_time'] = str(int(round(time.time())))
-    record_to_add['vote_number'] = '0'
-    record_to_add['question_id'] = data['question_id']
-    connection.write_new_answer(record_to_add, DATA_HEADER_A, False)
+@connection.connection_handler
+def add_answer(cursor, answer):
+    cursor.execute("""INSERT INTO answer (id, submission_time, vote_number, question_id, message, image) 
+    VALUES (%s %s %s %s %s )""", (answer['submission_time'], answer['vote_number'], answer['question_id'], answer['message'], answer['image']))
+    cursor.execute("SELECT * FROM answer")
+    result = cursor.fetchall()
+    return result
 
 
 @connection.connection_handler
