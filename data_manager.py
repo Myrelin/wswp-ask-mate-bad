@@ -109,18 +109,18 @@ def get_answers_for_question(cursor, question_id):
 @connection.connection_handler
 def delete_questions(cursor, question_id):
     cursor.execute("""
-                        DELETE FROM questions
+                        DELETE FROM question
                         WHERE id = {};
                         """.format(question_id))
     cursor.execute("""
-                        DELETE FROM answers
+                        DELETE FROM answer
                         WHERE question_id = {};
                         """.format(question_id))
 
 @connection.connection_handler
 def delete_answer(cursor,answer_id):
     cursor.execute("""
-                        DELETE FROM answers
+                        DELETE FROM answer
                         WHERE id = %d;
                         """(answer_id))
 
