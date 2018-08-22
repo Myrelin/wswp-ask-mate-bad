@@ -71,12 +71,10 @@ def order_by(atr, direction):
 
 @app.route('/answer/<answer_id>/delete')
 def answer_delete(answer_id):
-    answers = data_manager.get_all_answers()
-    for answer in answers:
-        if answer['id'] == answer_id:
-            question_id = answer['question_id']
+    answer = data_manager.get_answer_by_id(answer_id)
+
     data_manager.delete_answer(answer_id)
-    return redirect('/question/{}'.format(question_id))
+    return redirect('/question/{}'.format(answer[0]['question_id']))
 
 
 @app.route('/question/<id>/vote/<direction>/<question>')
