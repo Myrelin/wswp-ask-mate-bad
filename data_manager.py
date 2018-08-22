@@ -68,17 +68,19 @@ def get_all_answers(cursor):
 
 @connection.connection_handler
 def get_question_by_id(cursor, question_id):
-    cursor.execute(
-    "SELECT * FROM question WHERE id=%s", (question_id))
+    cursor.execute("""
+                    SELECT * FROM question WHERE id=%s
+                    """, (question_id))
     question = cursor.fetchall()
     return question
 
 @connection.connection_handler
 def get_answer_by_id(cursor, answer_id):
-    cursor.execute(
-    "SELECT * FROM question WHERE id=%s", (answer_id))
+    cursor.execute("""
+                    SELECT * FROM question WHERE id=%s
+                    """, (answer_id))
     answer = cursor.fetchall()
-
+    return answer
 
 
 def convert_timestamp(data):
@@ -99,16 +101,16 @@ def get_answers_for_question(question_id):
 def delete_questions(question_id):
     questions = get_all_question()
     answers = get_all_answers()
-    for i in range(len(questions)):
-        if questions[i]['id'] == question_id:
-            del questions[i]
-            break
     answers_for_question = get_answers_for_question(question_id)
     for answer in answers_for_question:
         for i in range(len(answers)):
             if answer['id'] == answers[i]['id']:
                 del answers[i]
                 break
+    for i in range(len(questions)):
+        if questions[i]['id'] == question_id:
+            del questions[i]
+            break
     connection.write_data(questions, DATA_HEADER_Q)
     connection.write_data(answers, DATA_HEADER_A, False)
 
