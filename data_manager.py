@@ -14,6 +14,16 @@ def add_question(cursor, question):
     result = cursor.fetchall()
     return result
 
+@connection.connection_handler
+def display_latest_questions():
+    cursor.execute("""
+                    SELECT * FROM question
+                    ORDER BY id DESC
+                    LIMIT 5;
+    """)
+    latest_questions = cursor.fetchall()
+    return latest_questions
+
 
 @connection.connection_handler
 def add_answer(cursor, answer):
