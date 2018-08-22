@@ -47,7 +47,7 @@ def get_all_question(cursor):
     return questions
 
 @connection.connection_handler
-def data_sort_by_atr(atr, ascend, cursor):
+def data_sort_by_atr(cursor, atr, ascend):
     if ascend:
         cursor.execute(
             """
@@ -68,7 +68,7 @@ def data_sort_by_atr(atr, ascend, cursor):
 
 @connection.connection_handler
 def get_all_answers(cursor):
-    answers = cursor.execute("""
+    cursor.execute("""
                     SELECT * FROM answer;
                     """)
     answers = cursor.fetchall()
@@ -87,7 +87,7 @@ def get_question_by_id(cursor, question_id):
 @connection.connection_handler
 def get_answer_by_id(cursor, answer_id):
     cursor.execute("""
-                    SELECT * FROM question WHERE id=%s;
+                    SELECT * FROM answer WHERE id=%s;
                     """, answer_id)
     answer = cursor.fetchall()
     return answer
@@ -132,7 +132,7 @@ def increase_view_number(cursor, question_id):
 
 
 @connection.connection_handler
-def voting(id, question, direction,cursor):
+def voting(cursor, id, question, direction,):
     if question:
         if direction == 'up':
             cursor.execute(
