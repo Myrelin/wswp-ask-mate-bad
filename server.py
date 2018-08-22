@@ -25,6 +25,11 @@ def display_question(question_id):
     answers_for_question = data_manager.get_answers_for_question(question_id)
     return render_template('question.html', data_question=data_question, answers_for_question=answers_for_question)
 
+@app.route('/question/<question_id>/edit', methods=['GET', 'POST'])
+def edit_question(question_id):
+    data_question = data_manager.get_question_by_id(questions, question_id)
+    
+
 
 @app.route('/add_question', methods=['GET', 'POST'])
 def add_question():
@@ -56,13 +61,10 @@ def delete_question(question_id):
 
 @app.route('/list/<atr>/<direction>')
 def order_by(atr, direction):
-    questions = data_manager.get_all_question()
     if direction == 'asc':
-        questions = data_manager.data_sort_by_atr(questions, atr, True)
+        questions = data_manager.data_sort_by_atr(atr, True)
     else:
-        questions = data_manager.data_sort_by_atr(questions, atr, False)
-    for i in range(len(questions)):
-        questions[i] = data_manager.convert_timestamp(questions[i])
+        questions = data_manager.data_sort_by_atr(atr, False)
     return render_template('list.html', questions=questions)
 
 

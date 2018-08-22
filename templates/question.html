@@ -33,6 +33,9 @@
             </td>
         </tr>
     </table>
+    <form action="/question/{{ data_question['id'] }}/edit" method="post">
+        <input type="submit" value="edit"> 
+    </form>
     <form action="/question/{{ data_question['id'] }}/delete" method="post">
         <input type="submit" value="delete">
     </form>    
