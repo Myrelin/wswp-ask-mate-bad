@@ -1,5 +1,4 @@
 import connection
-from datetime import datetime
 import time
 
 DATA_HEADER_Q = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
@@ -66,19 +65,21 @@ def get_all_answers(cursor):
     answers = cursor.fetchall()
     return answers
 
+
 @connection.connection_handler
 def get_question_by_id(cursor, question_id):
     cursor.execute("""
-                    SELECT * FROM question WHERE id=%s
-                    """, (question_id))
+                    SELECT * FROM question WHERE id=%s;
+                    """, question_id)
     question = cursor.fetchall()
     return question
+
 
 @connection.connection_handler
 def get_answer_by_id(cursor, answer_id):
     cursor.execute("""
-                    SELECT * FROM question WHERE id=%s
-                    """, (answer_id))
+                    SELECT * FROM question WHERE id=%s;
+                    """, answer_id)
     answer = cursor.fetchall()
     return answer
 
@@ -88,14 +89,13 @@ def convert_timestamp(data):
     return data
 
 
-def get_answers_for_question(question_id):
-    answers = connection.get_all_answer()
-    answers_for_question = []
-    for item in answers:
-        if item['question_id'] == str(question_id):
-            item = convert_timestamp(item)
-            answers_for_question.append(item)
-    return answers_for_question
+@connection.connection_handler
+def get_answers_for_question(cursor, question_id):
+    cursor.execute("""
+                    SELECT * FROM answer WHERE id={};
+                    """.format(question_id))
+    answers = cursor.fetchall()
+    return answers
 
 
 def delete_questions(question_id):
@@ -124,14 +124,14 @@ def delete_answer(answer_id):
     connection.write_data(answers, DATA_HEADER_A, False)
 
 
-def increase_view_number(question_id):
-    questions = get_all_question()
-    for i in range(len(questions)):
-        if questions[i]['id'] == question_id:
-            questions[i]['view_number'] = int(questions[i]['view_number'])
-            questions[i]['view_number'] += 1
-            questions[i]['view_number'] = str(questions[i]['view_number'])
-            connection.write_data(questions, DATA_HEADER_Q, True)
+@connection.connection_handler
+def increase_view_number(cursor, question_id):
+    cursor.execute("""
+                    UPDATE question
+                    SET view_number = view_number+1
+                    WHERE id={};
+                    """.format(question_id))
+
 
 
 def voting(id, question, direction):
