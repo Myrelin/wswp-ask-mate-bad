@@ -101,7 +101,9 @@ def get_answer_by_id(cursor, id):
 @connection.connection_handler
 def get_answers_for_question(cursor, question_id):
     cursor.execute("""
-                    SELECT * FROM answer WHERE question_id={};
+                    SELECT * FROM answer 
+                    WHERE question_id={}
+                    ORDER BY id ASC;
                     """.format(question_id))
     answers = cursor.fetchall()
     return answers

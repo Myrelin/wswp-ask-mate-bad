@@ -41,6 +41,7 @@
     <table>
         <thead>
             <tr>
+                "{}"
                 <td><h2>Submission Time</h2></td>
                 <td><h2>Vote number</h2></td>
                 <td><h2>Message</h2></td>
@@ -54,7 +55,12 @@
                     <td>{{ item['message']}}</td>
                     <td>
                         <form action="/answer/{{ item['id'] }}/delete">
-                            <input type="submit" value="Delete this answer">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/answer/{{ item['id'] }}/edit">
+                            <input type="submit" value="Edit">
                         </form>
                     </td>
                     <td>

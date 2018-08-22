@@ -85,14 +85,17 @@ def vote(id, direction, question):
     else:
         data_manager.voting(id, False, direction)
         answer = data_manager.get_answer_by_id(id)
-        print(id)
-        print(answer)
         return redirect('/question/{}'.format(answer[0]['question_id']))
 
 @app.route('/question/<id>/view_number')
 def increase_view_number(id):
     data_manager.increase_view_number(id)
     return redirect('question/{}'.format(id))
+
+@app.route('/answer/<id>/edit')
+def edit_answer(id):
+    answer = data_manager.get_answer_by_id(id)
+    return render_template('edit_answer.html',answer=answer)
 
 
 if __name__ == '__main__':
