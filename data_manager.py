@@ -15,7 +15,7 @@ def add_question(cursor, question):
     return result
 
 @connection.connection_handler
-def display_latest_questions():
+def display_latest_questions(cursor):
     cursor.execute("""
                     SELECT * FROM question
                     ORDER BY id DESC
