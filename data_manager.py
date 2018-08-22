@@ -171,3 +171,14 @@ def voting(cursor, id, question, direction,):
             )
 
 
+@connection.connection_handler
+def update_answer(cursor,answer):
+    cursor.execute(
+        """
+        UPDATE answer
+        SET message = '{}', image ='{}' 
+        WHERE id = {}
+        """.format(answer['message'], answer['image'], answer['id'])
+    )
+
+

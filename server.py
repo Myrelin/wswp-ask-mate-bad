@@ -92,10 +92,17 @@ def increase_view_number(id):
     data_manager.increase_view_number(id)
     return redirect('question/{}'.format(id))
 
-@app.route('/answer/<id>/edit')
+@app.route('/answer/<id>/edit', methods=['GET', 'POST'])
 def edit_answer(id):
-    answer = data_manager.get_answer_by_id(id)
-    return render_template('edit_answer.html',answer=answer)
+    if request.method == 'GET':
+        answer = data_manager.get_answer_by_id(id)
+        return render_template('new_answer.html',answer=answer,edit=True)
+    else:
+        answer = request.form.to_dict()
+        print(answer)
+        data_manager.update_answer(answer)
+        return redirect('question/{}'.format(answer['question_id']))
+
 
 
 if __name__ == '__main__':

@@ -1,19 +1,43 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Add new answer</h1><br>
+    {% if not edit %}
+        <h1>Add new answer</h1><br>
 
-    <form action="/question/{{ question_id }}/new_answer" method="POST">
-        <input type="hidden" id="question_id" name="question_id" value={{ question_id }} readonly>
-        <label for="message">New massage</label>
-        <br>
-        <textarea id="message" name="message" minlength="10"></textarea>
-        <br>
+        <form action="/question/{{ question_id }}/new_answer" method="POST">
+            <input type="hidden" id="question_id" name="question_id" value={{ question_id }} readonly>
+            <label for="message">New massage</label>
+            <br>
+            <textarea id="message" name="message" minlength="10" rows="4" cols="50"></textarea>
+            <br>
 
-        <label for="image">Image path</label>
-        <br>
-        <input type="text" id="image" name="image">
-        <br>
-        <button id="add_answer" type="submit">Submit Answer</button>
+            <label for="image">Image path</label>
+            <br>
+            <input type="text" id="image" name="image">
+            <br>
+            <button id="add_answer" type="submit">Submit Answer</button>
         
-    </form>
+        </form>
+    {% else %}
+        <h1>Edit answer</h1><br>
+
+        <form action='/answer/{{ answer[0]['id'] }}/edit' method="POST">
+            <input type="hidden" id="id" name="id" value={{ answer[0]['id'] }} readonly>
+            <input type="hidden" id="question_id" name="question_id" value={{ answer[0]['question_id'] }} readonly>
+            <input type="hidden" id="vote_number" name="vote_number" value={{ answer[0]['vote_number'] }} readonly>
+            <input type="hidden" id="submission_time" name="submission_time" value={{ answer[0]['submission_time'] }} readonly>
+            <label for="message">New massage</label>
+            <br>
+            <textarea id="message" name="message" minlength="10" rows="4" cols="50">
+                {{ answer[0]['message'] }}
+            </textarea>
+            <br>
+
+            <label for="image">Image path</label>
+            <br>
+            <input type="text" id="image" name="image" value="{{ answer[0]['image'] }}">
+            <br>
+            <button id="add_answer" type="submit">Submit Answer</button>
+
+        </form>
+    {% endif %}
 {% endblock %}
