@@ -56,13 +56,10 @@ def delete_question(question_id):
 
 @app.route('/list/<atr>/<direction>')
 def order_by(atr, direction):
-    questions = data_manager.get_all_question()
     if direction == 'asc':
-        questions = data_manager.data_sort_by_atr(questions, atr, True)
+        questions = data_manager.data_sort_by_atr(atr, True)
     else:
-        questions = data_manager.data_sort_by_atr(questions, atr, False)
-    for i in range(len(questions)):
-        questions[i] = data_manager.convert_timestamp(questions[i])
+        questions = data_manager.data_sort_by_atr(atr, False)
     return render_template('list.html', questions=questions)
 
 

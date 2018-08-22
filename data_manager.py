@@ -42,19 +42,23 @@ def get_all_question(cursor):
     questions = cursor.fetchall()
     return questions
 
-
-def data_sort_by_atr(data, atr, ascend):
-    try:
-        for line in data:
-            line[atr] = int(line[atr])
-    except ValueError:
-        pass
+@connection.connection_handler
+def data_sort_by_atr(atr, ascend, cursor):
     if ascend:
-        data = sorted(data, key=lambda x: x[atr])
+        cursor.execute(
+            """
+            SELECT * FROM question
+            ORDER BY {} DESC
+            """.format(atr)
+        )
     else:
-        data = sorted(data, key=lambda x: x[atr], reverse=True)
-    for line in data:
-        line[atr] = str(line[atr])
+        cursor.execute(
+            """
+            SELECT * FROM question
+            ORDER BY {} ASC 
+            """.format(atr)
+        )
+    data = cursor.fetchall()
     return data
 
 
@@ -134,46 +138,35 @@ def increase_view_number(question_id):
             connection.write_data(questions, DATA_HEADER_Q, True)
 
 
-def voting(id, question, direction):
+@connection.connection_handler
+def voting(id, question, direction,cursor):
     if question:
-        questions = get_all_question()
-        question = get_question_by_id(questions, id)
         if direction == 'up':
-            try:
-                question['vote_number'] = int(question['vote_number'])
-                question['vote_number'] += 1
-                question['vote_number'] = str(question['vote_number'])
-            except ValueError:
-                print('ERROR')
+            cursor.execute(
+                """
+                UPDATE question SET vote_number = vote_number + 1
+                WHERE id = {};
+                """.format(id)
+            )
         else:
-            try:
-                question['vote_number'] = int(question['vote_number'])
-                question['vote_number'] -= 1
-                question['vote_number'] = str(question['vote_number'])
-            except ValueError:
-                print('ERROR')
-        for i in range(len(questions)):
-            if questions[i]['id'] == question['id']:
-                questions[i] = question
-        connection.write_data(questions, DATA_HEADER_Q, True)
+            cursor.execute(
+                """
+                UPDATE question SET vote_number = vote_number - 1
+                WHERE id = {};
+                """.format(id)
+            )
     else:
-        answers = get_all_answers()
-        answer = get_answer_by_id(answers, id)
         if direction == 'up':
-            try:
-                answer['vote_number'] = int(answer['vote_number'])
-                answer['vote_number'] += 1
-                answer['vote_number'] = str(answer['vote_number'])
-            except ValueError:
-                print('ERROR')
+            cursor.execute(
+                """
+                UPDATE answer SET vote_number = vote_number + 1
+                WHERE id = {};
+                """.format(id)
+            )
         else:
-            try:
-                answer['vote_number'] = int(answer['vote_number'])
-                answer['vote_number'] -= 1
-                answer['vote_number'] = str(answer['vote_number'])
-            except ValueError:
-                print('ERROR')
-        for k in range(len(answers)):
-            if answers[k]['id'] == answer['id']:
-                answers[k] == answer
-        connection.write_data(answers, DATA_HEADER_A, False)
+            cursor.execute(
+                """
+                UPDATE answer SET vote_number + vote_number - 1
+                WHERE id = {};
+                """.format(id)
+            )
