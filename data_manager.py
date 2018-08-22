@@ -104,7 +104,7 @@ def delete_questions(cursor, question_id):
                         """.format(question_id))
 
 @connection.connection_handler
-def delete_answer(answer_id):
+def delete_answer(cursor,answer_id):
 
     cursor.execute("""
                         DELETE FROM answers
