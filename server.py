@@ -26,6 +26,7 @@ def display_question(question_id):
     answers_for_question = data_manager.get_answers_for_question(question_id)
     return render_template('question.html', data_question=data_question, answers_for_question=answers_for_question)
 
+
 @app.route('/question/<question_id>/edit', methods=['GET', 'POST'])
 def edit_question(question_id):
     data_question = data_manager.get_question_by_id(questions, question_id)
@@ -89,6 +90,11 @@ def vote(id, direction, question):
         data_manager.voting(id, False, direction)
         answer = data_manager.get_answer_by_id(answers, id)
         return redirect('/question/{}'.format(answer['question_id']))
+
+@app.route('/question/<id>/view_number')
+def increase_view_number(id):
+    new_view_number = data_manager.increase_view_number(id)
+    return redirect('question/{}'.format(id))
 
 
 if __name__ == '__main__':
