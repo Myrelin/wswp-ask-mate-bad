@@ -10,18 +10,13 @@ app = Flask(__name__)
 @app.route('/list')
 def route_home():
     questions = data_manager.get_all_question()
-    # questions = data_manager.data_sort_by_atr(questions, 'submission_time', False)
-    # for i in range(len(questions)):
-    #     questions[i] = data_manager.convert_timestamp(questions[i])
     return render_template('list.html', questions=questions)
 
 
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
 def display_question(question_id):
     data_manager.increase_view_number(question_id)
-    questions = data_manager.get_all_question()
-    data_question = data_manager.get_question_by_id(questions, question_id)
-    data_question = data_manager.convert_timestamp(data_question)
+    data_question = data_manager.get_question_by_id(question_id)
     answers_for_question = data_manager.get_answers_for_question(question_id)
     return render_template('question.html', data_question=data_question, answers_for_question=answers_for_question)
 

@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Question</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
 
-    <h1>{{ data_question['title'] }}</h1>
+    <h1>{{ data_question[0]['title'] }}</h1>
     <table>
         <thead>
             <tr>
@@ -14,13 +9,15 @@
                 <td><h2>Vote number</h2></td>
                 <td><h2>View number</h2></td>
                 <td><h2>Message</h2></td>
+                <td><h2>IMG</h2></td>
             </tr>
         </thead>
         <tr>
-            <td>{{ data_question['submission_time']}}</td>
-            <td>{{ data_question['vote_number']}}</td>
-            <td>{{ data_question['view_number']}}</td>
-            <td>{{ data_question['message']}}</td>
+            <td>{{ data_question[0]['submission_time']}}</td>
+            <td>{{ data_question[0]['vote_number']}}</td>
+            <td>{{ data_question[0]['view_number']}}</td>
+            <td>{{ data_question[0]['message']}}</td>
+            <td>{{ data_question[0]['image'] }}</td>
             <td>
                 <form action="/question/{{ data_question['id'] }}/vote/up/yes">
                     <input type="submit" value="VOTE UP">
@@ -82,5 +79,4 @@
     <form action="/">
         <input type="submit" value="HOME">
     </form>
-</body>
-</html>
+{% endblock %}
