@@ -74,10 +74,10 @@ def get_all_answers(cursor):
     answers = cursor.fetchall()
     return answers
 
-# @connection.connection_handler
-# def edit_answers(cursor):
-#     editted_answer = cursor.execute("""
-#                                 """)
+@connection.connection_handler
+def edit_answers(cursor):
+    editted_answer = cursor.execute("""
+                                """)
 
 @connection.connection_handler
 def get_question_by_id(cursor, question_id):
