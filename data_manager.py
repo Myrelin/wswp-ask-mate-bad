@@ -68,17 +68,19 @@ def get_all_answers(cursor):
 
 @connection.connection_handler
 def get_question_by_id(cursor, question_id):
-    cursor.execute(
-    "SELECT * FROM question WHERE id=%s", (question_id))
+    cursor.execute("""
+                    SELECT * FROM question WHERE id=%s
+                    """, (question_id))
     question = cursor.fetchall()
     return question
 
 @connection.connection_handler
 def get_answer_by_id(cursor, answer_id):
-    cursor.execute(
-    "SELECT * FROM question WHERE id=%s", (answer_id))
+    cursor.execute("""
+                    SELECT * FROM question WHERE id=%s
+                    """, (answer_id))
     answer = cursor.fetchall()
-
+    return answer
 
 
 def convert_timestamp(data):
