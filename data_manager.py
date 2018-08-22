@@ -104,7 +104,6 @@ def get_answers_for_question(cursor, question_id):
 
 @connection.connection_handler
 def delete_questions(cursor, question_id):
-
     cursor.execute("""
                         DELETE FROM questions
                         WHERE id = {};
@@ -116,7 +115,6 @@ def delete_questions(cursor, question_id):
 
 @connection.connection_handler
 def delete_answer(cursor,answer_id):
-
     cursor.execute("""
                         DELETE FROM answers
                         WHERE id = %d;
@@ -165,12 +163,5 @@ def voting(id, question, direction,cursor):
                 WHERE id = {};
                 """.format(id)
             )
-
-# def edit_question(question_id, data_question):
-#     all_questions = connection.get_all_question()
-#     for i in range(len(all_questions)):
-#         if all_questions[i]['id'] == data_question['id']:
-#             del all_questions[i]
-#             all_questions.insert(i, edited_question)
 
 

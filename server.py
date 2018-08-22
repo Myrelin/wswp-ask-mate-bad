@@ -6,11 +6,17 @@ import data_manager
 app = Flask(__name__)
 
 
-@app.route('/')
+
 @app.route('/list')
 def route_home():
     questions = data_manager.get_all_question()
     return render_template('list.html', questions=questions)
+
+@app.route('/')
+@app.route('/index', methods=['GET', 'POST'])
+def latest_five_questions():
+    latest_questions = data_manager.display_latest_questions()
+    return render_template('index.html', latest_questions=latest_questions)
 
 
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
