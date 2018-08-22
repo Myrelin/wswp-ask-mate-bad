@@ -89,10 +89,10 @@ def get_question_by_id(cursor, question_id):
 
 
 @connection.connection_handler
-def get_answer_by_id(cursor, answer_id):
+def get_answer_by_id(cursor, id):
     cursor.execute("""
-                    SELECT * FROM answer WHERE id=%s;
-                    """, answer_id)
+                    SELECT * FROM answer WHERE id={};
+                    """.format(id))
     answer = cursor.fetchall()
     return answer
 
@@ -101,7 +101,7 @@ def get_answer_by_id(cursor, answer_id):
 @connection.connection_handler
 def get_answers_for_question(cursor, question_id):
     cursor.execute("""
-                    SELECT * FROM answer WHERE id={};
+                    SELECT * FROM answer WHERE question_id={};
                     """.format(question_id))
     answers = cursor.fetchall()
     return answers

@@ -19,21 +19,21 @@
             <td>{{ data_question[0]['message']}}</td>
             <td>{{ data_question[0]['image'] }}</td>
             <td>
-                <form action="/question/{{ data_question['id'] }}/vote/up/yes">
+                <form action="/question/{{ data_question[0]['id'] }}/vote/up/yes">
                     <input type="submit" value="VOTE UP">
                 </form>
             </td>
             <td>
-                <form action='/question/{{ data_question['id'] }}/vote/dwn/yes'>
+                <form action='/question/{{ data_question[0]['id'] }}/vote/dwn/yes'>
                     <input type="submit" value="VOTE DOWN">
                 </form>
             </td>
         </tr>
     </table>
-    <form action="/question/{{ data_question['id'] }}/edit" method="post">
+    <form action="/question/{{ data_question[0]['id'] }}/edit" method="post">
         <input type="submit" value="edit"> 
     </form>
-    <form action="/question/{{ data_question['id'] }}/delete" method="post">
+    <form action="/question/{{ data_question[0]['id'] }}/delete" method="post">
         <input type="submit" value="delete">
     </form>    
     <br>
