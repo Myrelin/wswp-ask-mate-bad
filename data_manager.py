@@ -1,4 +1,5 @@
 import connection
+from datetime import datetime
 import time
 
 DATA_HEADER_Q = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
@@ -57,23 +58,27 @@ def data_sort_by_atr(data, atr, ascend):
     return data
 
 
-def get_all_answers():
-    answers = connection.get_all_answer()
+@connection.connection_handler
+def get_all_answers(cursor):
+    answers = cursor.execute("""
+                    SELECT * FROM answer;
+                    """)
+    answers = cursor.fetchall()
     return answers
 
+@connection.connection_handler
+def get_question_by_id(cursor, question_id):
+    cursor.execute(
+    "SELECT * FROM question WHERE id=%s", (question_id))
+    question = cursor.fetchall()
+    return question
 
-def get_question_by_id(data, question_id):
-    for item in data:
-        if item['id'] == str(question_id):
-            data_question = item
-    return data_question
+@connection.connection_handler
+def get_answer_by_id(cursor, answer_id):
+    cursor.execute(
+    "SELECT * FROM question WHERE id=%s", (answer_id))
+    answer = cursor.fetchall()
 
-
-def get_answer_by_id(data, answer_id):
-    for item in data:
-        if item['id'] == str(answer_id):
-            data_answer = item
-    return data_answer
 
 
 def convert_timestamp(data):
