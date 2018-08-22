@@ -8,9 +8,8 @@ DATA_HEADER_A = ['id', 'submission_time', 'vote_number', 'question_id', 'message
 
 @connection.connection_handler
 def add_question(cursor, question):
-    cursor.execute("""INSERT INTO question (id, submission_time, vote_number, question_id, message, image) 
-        VALUES (%s %s %s %s %s %s )""", (
-    question['submission_time'], question['view_number'], question['vote_number'], question['title'], question['message'], question['image']))
+    cursor.execute("""INSERT INTO question (submission_time, view_number, vote_number, title, message, image) 
+        VALUES(%s, %s, %s, %s, %s, %s)""", (question['submission_time'], question['view_number'], question['vote_number'], question['title'], question['message'], question['image']))
     cursor.execute("SELECT * FROM question")
     result = cursor.fetchall()
     return result
@@ -18,8 +17,8 @@ def add_question(cursor, question):
 
 @connection.connection_handler
 def add_answer(cursor, answer):
-    cursor.execute("""INSERT INTO answer (id, submission_time, vote_number, question_id, message, image) 
-    VALUES (%s %s %s %s %s )""", (answer['submission_time'], answer['vote_number'], answer['question_id'], answer['message'], answer['image']))
+    cursor.execute("""INSERT INTO answer (submission_time, vote_number, question_id, message, image) 
+    VALUES (%s, %s, %s, %s, %s)""", (answer['submission_time'], answer['vote_number'], answer['question_id'], answer['message'], answer['image']))
     cursor.execute("SELECT * FROM answer")
     result = cursor.fetchall()
     return result
