@@ -1,5 +1,5 @@
 import connection
-import time
+from datetime import datetime
 
 DATA_HEADER_Q = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
 DATA_HEADER_A = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
@@ -7,6 +7,9 @@ DATA_HEADER_A = ['id', 'submission_time', 'vote_number', 'question_id', 'message
 
 @connection.connection_handler
 def add_question(cursor, question):
+    question['submission_time'] = datetime.now()
+    question['vote_number'] = 0
+    question['view_number'] = 0
     cursor.execute("""INSERT INTO question (submission_time, view_number, vote_number, title, message, image) 
         VALUES(%s, %s, %s, %s, %s, %s)""", (question['submission_time'], question['view_number'], question['vote_number'], question['title'], question['message'], question['image']))
     cursor.execute("SELECT * FROM question")
@@ -16,6 +19,8 @@ def add_question(cursor, question):
 
 @connection.connection_handler
 def add_answer(cursor, answer):
+    answer['submission_time'] = datetime.now()
+    answer['vote_number'] = 0
     cursor.execute("""INSERT INTO answer (submission_time, vote_number, question_id, message, image) 
     VALUES (%s, %s, %s, %s, %s)""", (answer['submission_time'], answer['vote_number'], answer['question_id'], answer['message'], answer['image']))
     cursor.execute("SELECT * FROM answer")
@@ -63,8 +68,8 @@ def get_all_answers(cursor):
 @connection.connection_handler
 def get_question_by_id(cursor, question_id):
     cursor.execute("""
-                    SELECT * FROM question WHERE id=%s;
-                    """, question_id)
+                    SELECT * FROM question WHERE id={};
+                    """.format(question_id))
     question = cursor.fetchall()
     return question
 
@@ -77,10 +82,6 @@ def get_answer_by_id(cursor, answer_id):
     answer = cursor.fetchall()
     return answer
 
-
-def convert_timestamp(data):
-    data['submission_time'] = time.ctime(int(data['submission_time']))
-    return data
 
 
 @connection.connection_handler

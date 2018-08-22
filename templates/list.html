@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
     <h1>ASK MATE</h1>
-    <table>
+    <table >
         <tr>
             <th><a href ="{{ url_for('order_by',atr='submission_time',direction='asc') }}">&uarr;</a>Date<a href="{{ url_for('order_by',atr='submission_time',direction='desc') }}">&darr;</a></th>
             <th><a href ="{{ url_for('order_by',atr='title',direction='asc') }}">&uarr;</a>Title<a href ="{{ url_for('order_by',atr='title',direction='desc') }}">&darr;</a></th>
@@ -27,6 +22,4 @@
             <input type="submit" value="Ask a question">
         </div>
     </form>
-
-</body>
-</html>
+{% endblock %}
