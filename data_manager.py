@@ -74,10 +74,10 @@ def get_all_answers(cursor):
     answers = cursor.fetchall()
     return answers
 
-# @connection.connection_handler
-# def edit_answers(cursor):
-#     editted_answer = cursor.execute("""
-#                                 """)
+@connection.connection_handler
+def edit_answers(cursor):
+    editted_answer = cursor.execute("""
+                                """)
 
 @connection.connection_handler
 def get_question_by_id(cursor, question_id):
@@ -109,11 +109,11 @@ def get_answers_for_question(cursor, question_id):
 @connection.connection_handler
 def delete_questions(cursor, question_id):
     cursor.execute("""
-                        DELETE FROM questions
+                        DELETE FROM question
                         WHERE id = {};
                         """.format(question_id))
     cursor.execute("""
-                        DELETE FROM answers
+                        DELETE FROM answer
                         WHERE question_id = {};
                         """.format(question_id))
 
