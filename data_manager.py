@@ -101,7 +101,7 @@ def get_answers_for_question(cursor, question_id):
     answers = cursor.fetchall()
     return answers
 
-
+@connection.connection_handler
 def delete_questions(cursor, question_id):
 
     cursor.execute("""
@@ -112,35 +112,15 @@ def delete_questions(cursor, question_id):
                         DELETE FROM answers
                         WHERE question_id = {};
                         """.format(question_id))
-    # questions = get_all_question()
-    # answers = get_all_answers()
-    # answers_for_question = get_answers_for_question(question_id)
-    # for answer in answers_for_question:
-    #     for i in range(len(answers)):
-    #         if answer['id'] == answers[i]['id']:
-    #             del answers[i]
-    #             break
-    # for i in range(len(questions)):
-    #     if questions[i]['id'] == question_id:
-    #         del questions[i]
-    #         break
-    # connection.write_data(questions, DATA_HEADER_Q)
-    # connection.write_data(answers, DATA_HEADER_A, False)
 
-
-def delete_answer(answer_id)
+@connection.connection_handler
+def delete_answer(answer_id):
 
     cursor.execute("""
                         DELETE FROM answers
                         WHERE id = %d;
                         """(answer_id))
 
-    # answers = get_all_answers()
-    # for i in range(len(answers)):
-    #     if answers[i]['id'] == answer_id:
-    #         del answers[i]
-    #         break
-    # connection.write_data(answers, DATA_HEADER_A, False)
 
 @connection.connection_handler
 def increase_view_number(cursor, question_id):
@@ -180,16 +160,16 @@ def voting(id, question, direction,cursor):
         else:
             cursor.execute(
                 """
-                UPDATE answer SET vote_number + vote_number - 1
+                UPDATE answer SET vote_number = vote_number - 1
                 WHERE id = {};
                 """.format(id)
             )
 
-def edit_question(question_id, data_question):
-    all_questions = connection.get_all_question()
-    for i in range(len(all_questions)):
-        if all_questions[i]['id'] == data_question['id']:
-            del all_questions[i]
-            all_questions.insert(i, edited_question)
+# def edit_question(question_id, data_question):
+#     all_questions = connection.get_all_question()
+#     for i in range(len(all_questions)):
+#         if all_questions[i]['id'] == data_question['id']:
+#             del all_questions[i]
+#             all_questions.insert(i, edited_question)
 
 
