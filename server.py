@@ -91,7 +91,7 @@ def vote(id, direction, question):
 
 @app.route('/question/<id>/view_number')
 def increase_view_number(id):
-    new_view_number = data_manager.increase_view_number(id)
+    data_manager.increase_view_number(id)
     return redirect('question/{}'.format(id))
 
 
