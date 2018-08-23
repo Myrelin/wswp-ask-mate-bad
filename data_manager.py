@@ -43,9 +43,6 @@ def search(cursor, search_term):
     WHERE to_tsvector('english', title) @@ to_tsquery('english', '%{}%');
     """.format(search_term))
     search_result = cursor.fetchall()
-    # for result in search_result:
-    #     result['title'] = result['title'].replace(search_term['query'])
-    #     result['message'] = result['message'].replace(search_term['query'])
     return search_result
 
 @connection.connection_handler
