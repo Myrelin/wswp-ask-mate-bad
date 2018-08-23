@@ -37,6 +37,16 @@ def add_answer(cursor, answer):
     result = cursor.fetchall()
     return result
 
+@connection.connection_handler
+def search(cursor, search_term):
+    cursor.execute("""SELECT * FROM question 
+    WHERE to_tsvector('english', title) @@ to_tsquery('english', '%{}%') 
+    OR to_tsvector('english', message) @@ to_tsquery('english', '%{}%');""".format(search_term['query'], search_term['query']))
+    search_result = cursor.fetchall()
+    # for result in search_result:
+    #     result['title'] = result['title'].replace(search_term['query'])
+    #     result['message'] = result['message'].replace(search_term['query'])
+    return search_result
 
 @connection.connection_handler
 def get_all_question(cursor):
