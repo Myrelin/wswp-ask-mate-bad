@@ -13,7 +13,6 @@ def route_home():
     return render_template('list.html', questions=questions)
 
 @app.route('/')
-@app.route('/index', methods=['GET', 'POST'])
 def latest_five_questions():
     latest_questions = data_manager.display_latest_questions()
     return render_template('index.html', latest_questions=latest_questions)
@@ -25,11 +24,6 @@ def display_question(question_id):
     data_question = data_manager.get_question_by_id(question_id)
     answers_for_question = data_manager.get_answers_for_question(question_id)
     return render_template('question.html', data_question=data_question, answers_for_question=answers_for_question)
-
-# @app.route('/question/<question_id>/edit', methods=['GET', 'POST'])
-# def edit_question(question_id):
-#     data_question = data_manager.get_question_by_id(questions, question_id)
-    
 
 
 @app.route('/add_question', methods=['GET', 'POST'])
