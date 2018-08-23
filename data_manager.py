@@ -39,9 +39,9 @@ def add_answer(cursor, answer):
 
 @connection.connection_handler
 def search(cursor, search_term):
-    cursor.execute("""SELECT * FROM question 
-    WHERE to_tsvector('english', title) @@ to_tsquery('english', '%{}%') 
-    OR to_tsvector('english', message) @@ to_tsquery('english', '%{}%');""".format(search_term['query'], search_term['query']))
+    cursor.execute("""SELECT title, id FROM question 
+    WHERE to_tsvector('english', title) @@ to_tsquery('english', '%{}%');
+    """.format(search_term))
     search_result = cursor.fetchall()
     # for result in search_result:
     #     result['title'] = result['title'].replace(search_term['query'])
@@ -84,10 +84,6 @@ def get_all_answers(cursor):
     answers = cursor.fetchall()
     return answers
 
-@connection.connection_handler
-def edit_answers(cursor):
-    editted_answer = cursor.execute("""
-                                """)
 
 @connection.connection_handler
 def get_question_by_id(cursor, question_id):

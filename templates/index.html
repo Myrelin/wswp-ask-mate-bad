@@ -19,15 +19,15 @@
         {% endfor %}
     </table>
     <form action={{ url_for('route_home') }} method='GET'>
-
         <div>
             <input type="submit" value="View all questions">
         </div>
     </form>
     <div class="searching">
-        <form action="/search">
-            <input type="text" placeholder="Search..." name="query" id="query">
-            <button title="Search">Search</button>
+        <form action="/search" method="POST">
+            <input type="text" name="query" id="query" placeholder="Search...">
+            <input type="submit" value="SEARCH">
+            <br>
         </form>
     </div>
 {% endblock %}

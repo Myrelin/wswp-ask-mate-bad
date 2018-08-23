@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+    <h1>Search result</h1>
+    <table>
+        <tr>
+            <th>Question</th>
+        </tr>
+        {% for element in result %}
+        <tr>
+            <td><a href="/question/{{ element['id'] }}">{{ element['title'] }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
