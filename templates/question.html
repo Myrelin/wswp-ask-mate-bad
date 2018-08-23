@@ -9,7 +9,6 @@
                 <td><h2>Vote number</h2></td>
                 <td><h2>View number</h2></td>
                 <td><h2>Message</h2></td>
-                <td><h2>IMG</h2></td>
             </tr>
         </thead>
         <tr>
@@ -17,7 +16,6 @@
             <td>{{ data_question[0]['vote_number']}}</td>
             <td>{{ data_question[0]['view_number']}}</td>
             <td>{{ data_question[0]['message']}}</td>
-            <td>{{ data_question[0]['image'] }}</td>
             <td>
                 <form action="/question/{{ data_question[0]['id'] }}/vote/up/yes">
                     <input type="submit" value="VOTE UP">
