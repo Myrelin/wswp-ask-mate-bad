@@ -2,32 +2,35 @@
 {% block content %}
 
     <h1>{{ data_question[0]['title'] }}</h1>
-    <table>
-        <thead>
-            <tr>
-                <td><h2>Submission Time</h2></td>
-                <td><h2>Vote number</h2></td>
-                <td><h2>View number</h2></td>
-                <td><h2>Message</h2></td>
-            </tr>
-        </thead>
-        <tr>
-            <td>{{ data_question[0]['submission_time']}}</td>
-            <td>{{ data_question[0]['vote_number']}}</td>
-            <td>{{ data_question[0]['view_number']}}</td>
-            <td>{{ data_question[0]['message']}}</td>
-            <td>
-                <form action="/question/{{ data_question[0]['id'] }}/vote/up/yes">
-                    <input type="submit" value="VOTE UP">
-                </form>
-            </td>
-            <td>
-                <form action='/question/{{ data_question[0]['id'] }}/vote/dwn/yes'>
-                    <input type="submit" value="VOTE DOWN">
-                </form>
-            </td>
-        </tr>
-    </table>
+        <div class = "submission">
+            <p>Submission time {{ data_question[0]['submission_time']}}</p>
+        </div>
+{#    <table>#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <td><h2>Submission Time</h2></td>#}
+{#                <td><h2>Vote number</h2></td>#}
+{#                <td><h2>View number</h2></td>#}
+{#                <td><h2>Message</h2></td>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tr>#}
+{#            <td>{{ data_question[0]['submission_time']}}</td>#}
+{#            <td>{{ data_question[0]['vote_number']}}</td>#}
+{#            <td>{{ data_question[0]['view_number']}}</td>#}
+{#            <td>{{ data_question[0]['message']}}</td>#}
+{#            <td>#}
+{#                <form action="/question/{{ data_question[0]['id'] }}/vote/up/yes">#}
+{#                    <input type="submit" value="VOTE UP">#}
+{#                </form>#}
+{#            </td>#}
+{#            <td>#}
+{#                <form action='/question/{{ data_question[0]['id'] }}/vote/dwn/yes'>#}
+{#                    <input type="submit" value="VOTE DOWN">#}
+{#                </form>#}
+{#            </td>#}
+{#        </tr>#}
+{#    </table>#}
     <form action="/question/{{ data_question[0]['id'] }}/delete" method="post">
         <input type="submit" value="delete">
     </form>    

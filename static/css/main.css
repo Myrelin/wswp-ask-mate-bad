@@ -34,6 +34,13 @@ table, th, td {
     border: 1px solid black;
 }
 
+.searching {
+    text-align: right;
+}
+
+.ubmission p {
+
+}
 table {
     border-collapse: collapse;
     font-family: Georgia, serif;
