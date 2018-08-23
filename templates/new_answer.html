@@ -23,8 +23,6 @@
         <form action='/answer/{{ answer[0]['id'] }}/edit' method="POST">
             <input type="hidden" id="id" name="id" value={{ answer[0]['id'] }} readonly>
             <input type="hidden" id="question_id" name="question_id" value={{ answer[0]['question_id'] }} readonly>
-            <input type="hidden" id="vote_number" name="vote_number" value={{ answer[0]['vote_number'] }} readonly>
-            <input type="hidden" id="submission_time" name="submission_time" value={{ answer[0]['submission_time'] }} readonly>
             <label for="message">New massage</label>
             <br>
             <textarea id="message" name="message" minlength="10" rows="4" cols="50">{{ answer[0]['message'] }}</textarea>
