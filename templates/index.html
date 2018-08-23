@@ -19,6 +19,7 @@
         {% endfor %}
     </table>
     <form action={{ url_for('route_home') }} method='GET'>
+
         <div>
             <input type="submit" value="View all questions">
         </div>
@@ -27,7 +28,6 @@
         <form action="/search">
             <input type="text" placeholder="Search..." name="query" id="query">
             <button title="Search">Search</button>
-            <br>
         </form>
     </div>
 {% endblock %}
