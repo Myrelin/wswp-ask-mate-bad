@@ -180,5 +180,3 @@ def update_answer(cursor,answer):
         WHERE id = {}
         """.format(answer['message'], answer['image'], answer['id'])
     )
-
-
