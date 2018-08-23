@@ -99,7 +99,6 @@ def edit_answer(id):
         return render_template('new_answer.html',answer=answer,edit=True)
     else:
         answer = request.form.to_dict()
-        print(answer)
         data_manager.update_answer(answer)
         return redirect('question/{}'.format(answer['question_id']))
 
