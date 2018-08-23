@@ -97,6 +97,12 @@ def edit_answer(id):
         return redirect('question/{}'.format(answer['question_id']))
 
 
+@app.route('/search', methods=['GET'])
+def search():
+    search_data = request.form.to_dict()
+    result = data_manager.search(search_data['query'])
+    return render_template()
+
 
 if __name__ == '__main__':
     app.run(
