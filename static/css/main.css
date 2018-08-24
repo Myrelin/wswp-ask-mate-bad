@@ -1,14 +1,14 @@
 body {
-    background-color: #fffcdd;
+    background-color: #eee2dc;
     color: #07113f;
 }
 
 h1 {
     font-family: Georgia, serif;
-    font-size: 40px;
+    font-size: 45px;
     letter-spacing: 4px;
     word-spacing: 5px;
-    color: #000000;
+    color: #ac3b61;
     font-weight: bold;
     text-decoration: none;
     font-style: normal;
@@ -19,16 +19,26 @@ h1 {
 
 h2 {
     font-family: Georgia, serif;
-    font-size: 20px;
+    font-size: 25px;
     letter-spacing: 3px;
     word-spacing: 4px;
-    color: #000000;
+    color: #123c69;
     font-weight: normal;
     text-decoration: none;
     font-style: normal;
     font-variant: normal;
     text-transform: none;
     text-align: center;
+}
+
+input[type=submit] {
+  background-color: #edc7b7;
+  color: #ac3b61;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
 }
 table, th, td {
     border: 1px solid black;
@@ -38,9 +48,75 @@ table, th, td {
     text-align: right;
 }
 
-.ubmission p {
+.submission {
+    font-family: Georgia, serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    word-spacing: 4px;
+    color: #bab2b5;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: italic;
+    font-variant: normal;
+    text-transform: none;
+    text-align: right;
 
 }
+
+.vote_number {
+    font-family: Georgia, serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    word-spacing: 4px;
+    color: #bab2b5;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-align: right;
+
+}
+
+.view_number {
+    font-family: Georgia, serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    word-spacing: 4px;
+    color: #bab2b5;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-align: left;
+}
+
+.message {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    word-spacing: 4px;
+    color: #123c69;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-align: justify-all;
+}
+
+.delete {
+    font-size: 15px;
+    text-align: left;
+}
+
+.voting {
+    font-size: 15px;
+    text-align: right;
+}
+
+
 table {
     border-collapse: collapse;
     font-family: Georgia, serif;
