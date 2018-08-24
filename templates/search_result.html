@@ -4,8 +4,8 @@
 
     <h1>Search result</h1>
     <h3>Question</h3>
-    <div class = "search_result">
-    <table>
+
+    <table id="search_result">
         {% for element in result %}
         <tr>
 
@@ -13,5 +13,12 @@
         </tr>
         {% endfor %}
     </table>
+
+    <br>
+    <div class = "home">
+        <form action="/">
+            <input type="submit" value="HOME">
+        </form>
     </div>
+
 {% endblock %}
