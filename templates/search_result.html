@@ -3,14 +3,15 @@
 
 
     <h1>Search result</h1>
+    <h3>Question</h3>
+    <div class = "search_result">
     <table>
-        <tr>
-            <th>Question</th>
-        </tr>
         {% for element in result %}
         <tr>
+
             <td><a href="/question/{{ element['id'] }}">{{ element['title'] }}</a></td>
         </tr>
         {% endfor %}
     </table>
+    </div>
 {% endblock %}
