@@ -31,6 +31,19 @@ h2 {
     text-align: center;
 }
 
+h3 {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    letter-spacing: 3px;
+    word-spacing: 4px;
+    color: #123c69;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-align: center;
+}
 input[type=submit] {
   background-color: #edc7b7;
   color: #ac3b61;
@@ -42,6 +55,11 @@ input[type=submit] {
 }
 table, th, td {
     border: 1px solid black;
+}
+
+
+.give_answer {
+    text-align: center;
 }
 
 .searching {
@@ -132,6 +150,12 @@ table {
 
 }
 
+.search_result{
+    align-content: center;
+    padding-left: 35%;
+    padding-right: 35%;
+}
+
 th {
     text-align: center;
     font-family: Georgia, serif;
@@ -148,4 +172,30 @@ th {
 
 .content-wrapper {
     padding: 10%;
+}
+
+label {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    letter-spacing: 3px;
+    word-spacing: 4px;
+    color: #123c69;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-align: center;
+}
+
+.form_message {
+    text-align: center;
+}
+
+.form_submit {
+    text-align: center;
+}
+
+.form_title {
+    text-align: center;
 }
