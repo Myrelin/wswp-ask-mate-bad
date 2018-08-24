@@ -10,8 +10,8 @@ def add_question(cursor, question):
     question['submission_time'] = datetime.now()
     question['vote_number'] = 0
     question['view_number'] = 0
-    cursor.execute("""INSERT INTO question (submission_time, view_number, vote_number, title, message, image) 
-        VALUES(%s, %s, %s, %s, %s, %s)""", (question['submission_time'], question['view_number'], question['vote_number'], question['title'], question['message'], question['image']))
+    cursor.execute("""INSERT INTO question (submission_time, view_number, vote_number, title, message) 
+        VALUES(%s, %s, %s, %s, %s)""", (question['submission_time'], question['view_number'], question['vote_number'], question['title'], question['message']))
     cursor.execute("SELECT * FROM question")
     result = cursor.fetchall()
     return result
@@ -31,8 +31,8 @@ def display_latest_questions(cursor):
 def add_answer(cursor, answer):
     answer['submission_time'] = datetime.now()
     answer['vote_number'] = 0
-    cursor.execute("""INSERT INTO answer (submission_time, vote_number, question_id, message, image) 
-    VALUES (%s, %s, %s, %s, %s)""", (answer['submission_time'], answer['vote_number'], answer['question_id'], answer['message'], answer['image']))
+    cursor.execute("""INSERT INTO answer (submission_time, vote_number, question_id, message) 
+    VALUES (%s, %s, %s, %s)""", (answer['submission_time'], answer['vote_number'], answer['question_id'], answer['message']))
     cursor.execute("SELECT * FROM answer")
     result = cursor.fetchall()
     return result
@@ -114,12 +114,12 @@ def get_answers_for_question(cursor, question_id):
 @connection.connection_handler
 def delete_questions(cursor, question_id):
     cursor.execute("""
-                        DELETE FROM question
-                        WHERE id = {};
-                        """.format(question_id))
-    cursor.execute("""
                         DELETE FROM answer
                         WHERE question_id = {};
+                        """.format(question_id))
+    cursor.execute("""
+                        DELETE FROM question
+                        WHERE id = {};
                         """.format(question_id))
 
 @connection.connection_handler
@@ -179,7 +179,7 @@ def update_answer(cursor,answer):
     cursor.execute(
         """
         UPDATE answer
-        SET message = '{}', image ='{}' 
+        SET message = '{}' 
         WHERE id = {}
-        """.format(answer['message'], answer['image'], answer['id'])
+        """.format(answer['message'], answer['id'])
     )

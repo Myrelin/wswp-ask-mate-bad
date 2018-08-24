@@ -31,53 +31,50 @@
                 </form>
             </div>
             </p>
+        <div class = "give_answer">
+            <form action="/question/{{ data_question[0]['id'] }}/new_answer", method="GET">
+                <input type="submit" value="Give an answer">
+            </form>
+        </div>
 
     <br>
     <h1>Answers</h1>
-    <table>
-        <thead>
-            <tr>
-                <td><h2>Submission Time</h2></td>
-                <td><h2>Vote number</h2></td>
-                <td><h2>Message</h2></td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in answers_for_question %}
-                <tr>
-                    <td>{{ item['submission_time']}}</td>
-                    <td>{{ item['vote_number']}}</td>
-                    <td>{{ item['message']}}</td>
-                    <td>
-                        <form action="/answer/{{ item['id'] }}/delete">
-                            <input type="submit" value="Delete">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/answer/{{ item['id'] }}/edit">
-                            <input type="submit" value="Edit">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/question/{{ item['id'] }}/vote/up/no">
-                            <input type="submit" value="VOTE UP">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/question/{{ item['id'] }}/vote/dwn/no">
-                            <input type="submit" value="VOTE DOWN">
-                        </form>
-                    </td>
-                </tr>
-            {% endfor%}
-        </tbody>
 
-    </table>
+        {% for item in answers_for_question %}
+            <div class = "submission">
+                {{ item['submission_time']}}
+            </div><br>
+            <div class = "message">
+                {{ item['message']}}
+            </div>
+            <div class = "vote_number">
+                Vote number: {{ item['vote_number']}}
+            </div>
+            <p>
+                <div class = "delete">
+                <form action="/answer/{{ item['id'] }}/delete">
+                        <input type="submit" value="Delete">
+                    </form>
+                </div>
+                <div class = "edit">
+                    <form action="/answer/{{ item['id'] }}/edit">
+                        <input type="submit" value="Edit">
+                    </form>
+                </div>
+                <div class = "voting">
+                   <form action="/question/{{ item['id'] }}/vote/up/no">
+                        <input type="submit" value="Upvote">
+                    </form>
+                    <form action="/question/{{ item['id'] }}/vote/dwn/no">
+                        <input type="submit" value="Downvote">
+                    </form>
+                </div>
+            {% endfor%}
+            </p>
     <br>
-    <form action="/question/{{ data_question[0]['id'] }}/new_answer", method="GET">
-        <input type="submit" value="Give an answer">
-    </form>
+    <div class = "home">
     <form action="/">
         <input type="submit" value="HOME">
     </form>
+    </div>
 {% endblock %}

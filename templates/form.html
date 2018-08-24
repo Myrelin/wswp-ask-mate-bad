@@ -2,19 +2,15 @@
 {% block content %}
     <h1>What do you want to ask?</h1>
     <form method='POST' action={{ url_for('add_question') }}>
-        <div>
-            <label for=title>TITLE<br></label>
-            <textarea id="title" name="title" rows="5" cols="20"></textarea>
+        <div class = "form_title">
+            <label for=title>Title<br></label>
+            <textarea id="title" name="title" rows="5" cols="70"></textarea>
         </div>
-        <div>
+        <div class = "form_message">
             <label for="message">Message<br></label>
-            <textarea id="message" name="message" rows="5" cols="20"></textarea>
+            <textarea id="message" name="message" rows="15" cols="70"></textarea>
         </div>
-        <div>
-            <label for="image">Image path<br></label>
-            <textarea id="image" name="image" rows="5" cols="20"></textarea>
-        </div>
-        <div>
+        <div class = "form_submit">
             <input type="submit" value="Ask them tiger!">
         </div>
     </form>

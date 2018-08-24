@@ -5,16 +5,17 @@
 
         <form action="/question/{{ question_id }}/new_answer" method="POST">
             <input type="hidden" id="question_id" name="question_id" value={{ question_id }} readonly>
-            <label for="message">New massage</label>
+            <div class = "form_title">
+            <label for="message">New message</label>
+            </div>
             <br>
-            <textarea id="message" name="message" minlength="10" rows="4" cols="50"></textarea>
+            <div class = "form_message">
+                <textarea id="message" name="message" minlength="10" rows="4" cols="70"></textarea>
+            </div>
             <br>
-
-            <label for="image">Image path</label>
-            <br>
-            <input type="text" id="image" name="image">
-            <br>
+            <div class = "form_submit">
             <button id="add_answer" type="submit">Submit Answer</button>
+            </div>
         
         </form>
     {% else %}
@@ -23,17 +24,17 @@
         <form action='/answer/{{ answer[0]['id'] }}/edit' method="POST">
             <input type="hidden" id="id" name="id" value={{ answer[0]['id'] }} readonly>
             <input type="hidden" id="question_id" name="question_id" value={{ answer[0]['question_id'] }} readonly>
-            <label for="message">New massage</label>
+            <div class = "form_title">
+            <label for="message">New message</label>
+            </div>
             <br>
-            <textarea id="message" name="message" minlength="10" rows="4" cols="50">{{ answer[0]['message'] }}</textarea>
+            <div class = "form_message">
+            <textarea id="message" name="message" minlength="10" rows="4" cols="70">{{ answer[0]['message'] }}</textarea>
+            </div>
             <br>
-
-            <label for="image">Image path</label>
-            <br>
-            <input type="text" id="image" name="image" value="{{ answer[0]['image'] }}">
-            <br>
+            <div class = "form_submit">
             <button id="add_answer" type="submit">Submit Answer</button>
-
+            </div>
         </form>
     {% endif %}
 {% endblock %}

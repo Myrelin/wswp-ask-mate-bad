@@ -3,6 +3,10 @@ body {
     color: #07113f;
 }
 
+.home {
+    text-align: center;
+}
+
 h1 {
     font-family: Georgia, serif;
     font-size: 45px;
@@ -150,10 +154,10 @@ table {
 
 }
 
-.search_result{
-    align-content: center;
-    padding-left: 35%;
-    padding-right: 35%;
+#search_result{
+    width: 100%;
+    text-align: center;
+
 }
 
 th {
