@@ -104,7 +104,6 @@ def search():
     result = data_manager.search(search_data['query'])
     return render_template('search_result.html', result=result)
 
-
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',

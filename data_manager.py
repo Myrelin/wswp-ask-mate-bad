@@ -184,3 +184,18 @@ def update_answer(cursor,answer):
         WHERE id = {}
         """.format(answer['message'], answer['id'])
     )
+
+@connection.connection_handler
+def create_users_table(cursor):
+    cursor.execute(
+        """
+            CREATE TABLE users (
+        ID SERIAL PRIMARY KEY,
+        username varchar(255) NOT NULL,
+        pw_hash varchar(255),
+        creation_date DATE
+        );
+        """
+    )
+if __name__ == "__main__":
+    create_users_table()
