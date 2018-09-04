@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Ask Mate User List</h1>
+    <table >
+        <tr>
+            <th><a href ="{{ url_for('order_by',atr='username',direction='asc') }}">&uarr;</a>Username<a href="{{ url_for('order_by',atr='username',direction='desc') }}">&darr;</a></th>
+            <th><a href ="{{ url_for('order_by',atr='reputation',direction='asc') }}">&uarr;</a>Reputation<a href ="{{ url_for('order_by',atr='reputation',direction='desc') }}">&darr;</a></th>
+            <th><a href ="{{ url_for('order_by',atr='creation_date',direction='asc') }}">&uarr;</a>Date Joined<a href ="{{ url_for('order_by',atr='creation_date',direction='desc') }}">&darr;</a></th>
+
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td><a href="/users/{{users['id']}}"> {{ users['username'] }} </a></td>
+            <td>{{ users['reputation'] }}</td>
+            <td>{{ users['creation_date'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <form action="/">
+        <div class="home">
+            <input type="submit" value="Home">
+        </div>
+    </form>
+{% endblock %}
