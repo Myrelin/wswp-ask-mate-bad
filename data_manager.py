@@ -4,7 +4,7 @@ from datetime import datetime
 DATA_HEADER_Q = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
 DATA_HEADER_A = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
 
-#dev branch still trying
+#dev branch still trying and still
 
 @connection.connection_handler
 def add_question(cursor, question):
