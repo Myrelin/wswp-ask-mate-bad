@@ -197,5 +197,7 @@ def create_users_table(cursor):
         );
         """
     )
+
+
 if __name__ == "__main__":
     create_users_table()
