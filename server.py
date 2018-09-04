@@ -104,6 +104,16 @@ def search():
     result = data_manager.search(search_data['query'])
     return render_template('search_result.html', result=result)
 
+@app.route('/registration', methods=['GET', 'POST'])
+def registration():
+    if request.method == 'GET':
+        return render_template('registration.html')
+    else:
+        data = request.form.to_dict()
+        data_manager.create_user(data['username'],data['password'])
+        return redirect('/')
+
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',

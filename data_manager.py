@@ -1,8 +1,7 @@
 import connection
 from datetime import datetime
-
-DATA_HEADER_Q = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
-DATA_HEADER_A = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
+import hash
+import psycopg2
 
 #dev branch still trying and still
 
@@ -191,13 +190,28 @@ def create_users_table(cursor):
         """
             CREATE TABLE users (
         ID SERIAL PRIMARY KEY,
-        username varchar(255) NOT NULL,
+        username varchar(255) NOT NULL UNIQUE,
         pw_hash varchar(255),
         creation_date DATE
         );
         """
     )
 
+@connection.connection_handler
+def create_user(cursor,username,password):
+    pw_hash = hash.hash_password(password)
+    date = datetime.now()
+    try:
+        cursor.execute(
+            """
+            INSERT INTO users (username, pw_hash, creation_date)
+            VALUES (%s,%s,%s)
+            
+            """,(username, pw_hash, date)
+        )
+    except psycopg2.IntegrityError:
+        print("DASDADSADASD")
 
 if __name__ == "__main__":
     create_users_table()
+    create_user("admin","admin")
