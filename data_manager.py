@@ -212,6 +212,34 @@ def create_user(cursor,username,password):
     except psycopg2.IntegrityError:
         print("DASDADSADASD")
 
+@connection.connection_handler
+def check_login(cursor,username,password):
+
+    cursor.execute(
+        """
+        SELECT username, pw_hash FROM users
+        WHERE username = '{}'
+        
+        """.format(username)
+    )
+    data = cursor.fetchone()
+    print(data)
+    if data['username'] == username and hash.verify_password(password,data['pw_hash']):
+        return True
+    else:
+        return False
+
+@connection.connection_handler
+def get_user_by_username(cursor,username):
+    cursor.execute(
+        """
+        SELECT id FROM users
+        WHERE username = '{}'
+        """.format(username)
+    )
+    data = cursor.fetchone()
+    return data['id']
+
 if __name__ == "__main__":
     create_users_table()
     create_user("admin","admin")
