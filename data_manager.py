@@ -180,7 +180,7 @@ def update_answer(cursor,answer):
         """
         UPDATE answer
         SET message = '{}' 
-        WHERE id = {}
+        WHERE id = {};
         """.format(answer['message'], answer['id'])
     )
 
@@ -196,6 +196,15 @@ def create_users_table(cursor):
         );
         """
     )
+@connection.connection_handler
+def list_users():
+    cursor.execute ("""
+    SELECT username, reputation, creation_date
+    FROM users
+    ORDER username BY ASC;
+    """)
+
+
 
 @connection.connection_handler
 def create_user(cursor,username,password):
