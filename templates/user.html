@@ -11,7 +11,7 @@
                 <tr>
                     <td>
                         {% for question in questions_by_user %}
-                            <a href="/question/{{question['question_id']}}"> {{ question['message'] }} </a>
+                            <a href="/question/{{question['question_id']}}"> {{ question['title'] }} </a>
                         {% endfor %}
                     </td>
                 </tr>
