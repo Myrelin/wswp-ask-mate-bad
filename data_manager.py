@@ -189,7 +189,7 @@ def update_answer(cursor,answer):
 
 
 @connection.connection_handler
-def create_users_table(cursor):
+def setup_database(cursor):
     cursor.execute(
         """
             CREATE TABLE users (
@@ -198,6 +198,10 @@ def create_users_table(cursor):
         pw_hash varchar(255),
         creation_date DATE
         );
+        ALTER TABLE question
+        ADD COLUMN user_id INT;
+        ALTER TABLE answer 
+        ADD COLUMN user_id INT;
         """
     )
 
@@ -226,21 +230,6 @@ def create_user(cursor,username,password):
     except psycopg2.IntegrityError:
         print("DASDADSADASD")
 
-
-@connection.connection_handler
-def create_user(cursor,username,password):
-    pw_hash = hash.hash_password(password)
-    date = datetime.now()
-    try:
-        cursor.execute(
-            """
-            INSERT INTO users (username, pw_hash, creation_date)
-            VALUES (%s,%s,%s)
-            
-            """,(username, pw_hash, date)
-        )
-    except psycopg2.IntegrityError:
-        print("DASDADSADASD")
 
 
 @connection.connection_handler
@@ -294,5 +283,5 @@ def get_user_by_username(cursor, username):
     data = cursor.fetchone()
     return data['id']
 if __name__ == "__main__":
-    create_users_table()
+    setup_database()
     create_user("admin","admin")
