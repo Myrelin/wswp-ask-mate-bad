@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>ASK MATE</h1>
+    {% if not session['login'] %}
     <a href={{ url_for('registration') }}>registration</a>
     <a href="{{ url_for('login') }}">log in</a>
+    {% endif %}
     <h2>Latest Questions</h2>
     <table>
         <tr>
