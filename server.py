@@ -52,6 +52,7 @@ def add_question():
     page_title = "Ask a QUESTION"
     if request.method == 'POST':
         data = request.form.to_dict()
+        data["user_id"] = session["user_id"]
         data_manager.add_question(data)
         return redirect('/')
     else:
@@ -62,6 +63,7 @@ def add_question():
 def add_new_answer(question_id):
     if request.method == 'POST':
         data = request.form.to_dict()
+        data["user_id"] = session["user_id"]
         data_manager.add_answer(data)
         return redirect('/question/{}'.format(question_id))
     else:
