@@ -9,8 +9,8 @@ def add_question(cursor, question):
     question['submission_time'] = datetime.now()
     question['vote_number'] = 0
     question['view_number'] = 0
-    cursor.execute("""INSERT INTO question (submission_time, view_number, vote_number, title, message) 
-        VALUES(%s, %s, %s, %s, %s)""", (question['submission_time'], question['view_number'], question['vote_number'], question['title'], question['message']))
+    cursor.execute("""INSERT INTO question (submission_time, view_number, vote_number, title, message, user_id) 
+        VALUES(%s, %s, %s, %s, %s, %s)""", (question['submission_time'], question['view_number'], question['vote_number'], question['title'], question['message'], question['user_id']))
     cursor.execute("SELECT * FROM question")
     result = cursor.fetchall()
     return result
@@ -31,8 +31,8 @@ def display_latest_questions(cursor):
 def add_answer(cursor, answer):
     answer['submission_time'] = datetime.now()
     answer['vote_number'] = 0
-    cursor.execute("""INSERT INTO answer (submission_time, vote_number, question_id, message) 
-    VALUES (%s, %s, %s, %s)""", (answer['submission_time'], answer['vote_number'], answer['question_id'], answer['message']))
+    cursor.execute("""INSERT INTO answer (submission_time, vote_number, question_id, message, user_id) 
+    VALUES (%s, %s, %s, %s, %s)""", (answer['submission_time'], answer['vote_number'], answer['question_id'], answer['message'], answer['user_id']))
     cursor.execute("SELECT * FROM answer")
     result = cursor.fetchall()
     return result

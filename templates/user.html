@@ -8,13 +8,13 @@
                 <th>Questions by users</th><br>
             {% endif %}
             <tbody>
+                {% for question in questions_by_user %}
                 <tr>
                     <td>
-                        {% for question in questions_by_user %}
-                            <a href="/question/{{question['question_id']}}"> {{ question['title'] }} </a>
-                        {% endfor %}
+                        <a href="/question/{{question['question_id']}}"> {{ question['title'] }} </a>
                     </td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -25,13 +25,13 @@
                 <th>Answers by users</th><br>
             {% endif %}
             <tbody>
+            {% for answer in answers_by_user %}
                 <tr>
                     <td>
-                        {% for answer in answers_by_user %}
-                            {{ answer['message']}}
-                        {% endfor %}
+                        {{ answer['message']}}
                     </td>
-                </tr>
+            </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
