@@ -4,7 +4,7 @@
 
         <table id="question_table">
             {% if questions_by_user %}
-                <h2>Questions by user</h2><br>
+                <h2>Questions by {{ questions_by_user[0]['username'] }}</h2><br>
             {% endif %}
             <tbody>
                 {% for question in questions_by_user %}
@@ -19,7 +19,7 @@
 
         <table id="answer_table">
             {% if answers_by_user %}
-                <h2>Answers by user</h2><br>
+                <h2>Answers by {{ answers_by_user[0]['username'] }}</h2><br>
             {% endif %}
             <tbody>
                 {% for answer in answers_by_user %}

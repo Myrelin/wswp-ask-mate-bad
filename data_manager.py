@@ -237,7 +237,7 @@ def create_user(cursor,username,password):
 @connection.connection_handler
 def questions_by_user(cursor, user_id):
     cursor.execute("""
-                    SELECT users.id, question.title, question.id AS question_id FROM users 
+                    SELECT users.id, users.username, question.title, question.id AS question_id FROM users 
                     INNER JOIN question
                     ON users.id = question.user_id
                     WHERE users.id = %(uid)s""", {"uid": user_id})
@@ -248,7 +248,7 @@ def questions_by_user(cursor, user_id):
 @connection.connection_handler
 def answers_by_user(cursor, user_id):
     cursor.execute("""
-                    SELECT users.id, answer.message, answer.id AS answer_id FROM users
+                    SELECT users.id, users.username, answer.message, answer.id AS answer_id FROM users
                     INNER JOIN answer
                     ON users.id = answer.user_id
                     WHERE users.id = %(uid)s""", {"uid": user_id})
