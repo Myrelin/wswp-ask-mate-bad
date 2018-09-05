@@ -104,10 +104,12 @@ def vote(id, direction, question):
         answer = data_manager.get_answer_by_id(id)
         return redirect('/question/{}'.format(answer[0]['question_id']))
 
+
 @app.route('/question/<id>/view_number')
 def increase_view_number(id):
     data_manager.increase_view_number(id)
     return redirect('question/{}'.format(id))
+
 
 @app.route('/answer/<id>/edit', methods=['GET', 'POST'])
 def edit_answer(id):
@@ -138,6 +140,7 @@ def registration():
             return redirect('/registration')
         flash('username: {} registered'.format(data['username']))
         return redirect('/')
+
 
 @app.route('/user/<user_id>', methods=['GET', 'POST'])
 def user_activities(user_id):
