@@ -223,7 +223,8 @@ def check_login(cursor,username,password):
         """.format(username)
     )
     data = cursor.fetchone()
-    print(data)
+    if data is None:
+        return False
     if data['username'] == username and hash.verify_password(password,data['pw_hash']):
         return True
     else:
