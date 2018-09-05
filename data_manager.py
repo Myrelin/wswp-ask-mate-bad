@@ -1,10 +1,8 @@
 import connection
 from datetime import datetime
+import hash
+import psycopg2
 
-DATA_HEADER_Q = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
-DATA_HEADER_A = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
-
-#dev branch still trying and still
 
 @connection.connection_handler
 def add_question(cursor, question):
@@ -16,6 +14,7 @@ def add_question(cursor, question):
     cursor.execute("SELECT * FROM question")
     result = cursor.fetchall()
     return result
+
 
 @connection.connection_handler
 def display_latest_questions(cursor):
@@ -38,6 +37,7 @@ def add_answer(cursor, answer):
     result = cursor.fetchall()
     return result
 
+
 @connection.connection_handler
 def search(cursor, search_term):
     cursor.execute("""SELECT title, id FROM question 
@@ -45,6 +45,7 @@ def search(cursor, search_term):
     """.format(search_term))
     search_result = cursor.fetchall()
     return search_result
+
 
 @connection.connection_handler
 def get_all_question(cursor):
@@ -101,7 +102,6 @@ def get_answer_by_id(cursor, id):
     return answer
 
 
-
 @connection.connection_handler
 def get_answers_for_question(cursor, question_id):
     cursor.execute("""
@@ -111,6 +111,7 @@ def get_answers_for_question(cursor, question_id):
                     """.format(question_id))
     answers = cursor.fetchall()
     return answers
+
 
 @connection.connection_handler
 def delete_questions(cursor, question_id):
@@ -122,6 +123,7 @@ def delete_questions(cursor, question_id):
                         DELETE FROM question
                         WHERE id = {};
                         """.format(question_id))
+
 
 @connection.connection_handler
 def delete_answer(cursor,answer_id):
@@ -185,13 +187,14 @@ def update_answer(cursor,answer):
         """.format(answer['message'], answer['id'])
     )
 
+
 @connection.connection_handler
 def create_users_table(cursor):
     cursor.execute(
         """
             CREATE TABLE users (
         ID SERIAL PRIMARY KEY,
-        username varchar(255) NOT NULL,
+        username varchar(255) NOT NULL UNIQUE,
         pw_hash varchar(255),
         creation_date DATE
         );
@@ -199,5 +202,44 @@ def create_users_table(cursor):
     )
 
 
+@connection.connection_handler
+def create_user(cursor,username,password):
+    pw_hash = hash.hash_password(password)
+    date = datetime.now()
+    try:
+        cursor.execute(
+            """
+            INSERT INTO users (username, pw_hash, creation_date)
+            VALUES (%s,%s,%s)
+            
+            """,(username, pw_hash, date)
+        )
+    except psycopg2.IntegrityError:
+        print("DASDADSADASD")
+
+
+@connection.connection_handler
+def questions_by_user(cursor, user_id):
+    cursor.execute("""
+                    SELECT users.id, question.message, question.id AS question_id FROM users 
+                    INNER JOIN question
+                    ON users.id = question.user_id
+                    WHERE users.id = %(uid)s""", {"uid": user_id})
+    result = cursor.fetchall()
+    return result
+
+
+@connection.connection_handler
+def answers_by_user(cursor, user_id):
+    cursor.execute("""
+                    SELECT users.id, answer.message, answer.id AS answer_id FROM users
+                    INNER JOIN answer
+                    ON users.id = answer.user_id
+                    WHERE users.id = %(uid)s""", {"uid": user_id})
+    result = cursor.fetchall()
+    return result
+
+
 if __name__ == "__main__":
     create_users_table()
+    create_user("admin","admin")
