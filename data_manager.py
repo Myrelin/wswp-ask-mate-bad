@@ -196,7 +196,8 @@ def setup_database(cursor):
         ID SERIAL PRIMARY KEY,
         username varchar(255) NOT NULL UNIQUE,
         pw_hash varchar(255),
-        creation_date DATE
+        creation_date DATE,
+        reputation INT DEFAULT 0
         );
         ALTER TABLE question
         ADD COLUMN user_id INT;
