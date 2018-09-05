@@ -9,6 +9,9 @@
     <div class = 'login'>
         {% if session['login'] %}
             <h4>Logged in as {{ session['username'] }}</h4>
+            <form action='{{ url_for('logout') }}'>
+                <input type="submit" value="LOG OUT" />
+            </form>
         {% endif %}
     </div>
     {% with messages = get_flashed_messages() %}

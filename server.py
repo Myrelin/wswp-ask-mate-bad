@@ -139,6 +139,11 @@ def user_activities(user_id):
     answers_by_user = data_manager.answers_by_user(user_id)
     return render_template('user.html', questions_by_user=questions_by_user, answers_by_user=answers_by_user)
 
+@app.route('/logout')
+def logout():
+    session['login'] = False
+    return redirect('/')
+
 
 if __name__ == '__main__':
     app.run(
