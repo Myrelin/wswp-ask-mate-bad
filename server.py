@@ -1,10 +1,27 @@
-from flask import Flask, render_template, request, redirect, url_for
-
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+import os
 
 import data_manager
 
 app = Flask(__name__)
+app.secret_key = os.urandom(12)
 
+@app.route('/login',methods=['GET','POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html')
+    else:
+        user_data = request.form
+        if not (data_manager.check_login(user_data['username'],user_data['password'])):
+            flash('Invalid user name or password or username not exists')
+            return redirect('/login')
+        else:
+            session['user_id'] = data_manager.get_user_by_username(user_data['username'])
+            session['username'] = user_data['username']
+            session['login'] = True
+            flash('Successful login')
+            return redirect('/')
+        print(session)
 
 
 @app.route('/list')
@@ -13,7 +30,6 @@ def route_home():
     return render_template('list.html', questions=questions)
 
 @app.route('/')
-@app.route('/index', methods=['GET', 'POST'])
 def latest_five_questions():
     latest_questions = data_manager.display_latest_questions()
     return render_template('index.html', latest_questions=latest_questions)
