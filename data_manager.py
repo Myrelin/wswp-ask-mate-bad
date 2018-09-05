@@ -228,8 +228,9 @@ def create_user(cursor,username,password):
             
             """,(username, pw_hash, date)
         )
+        return True
     except psycopg2.IntegrityError:
-        print("DASDADSADASD")
+        return False
 
 
 
@@ -283,6 +284,8 @@ def get_user_by_username(cursor, username):
     )
     data = cursor.fetchone()
     return data['id']
+
+
 if __name__ == "__main__":
     setup_database()
     create_user("admin","admin")

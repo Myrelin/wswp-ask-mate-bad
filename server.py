@@ -132,7 +132,11 @@ def registration():
         return render_template('registration.html')
     else:
         data = request.form.to_dict()
-        data_manager.create_user(data['username'],data['password'])
+        create = data_manager.create_user(data['username'],data['password'])
+        if not create:
+            flash('Username already exists')
+            return redirect('/registration')
+        flash('username: {} registered'.format(data['username']))
         return redirect('/')
 
 @app.route('/user/<user_id>', methods=['GET', 'POST'])
