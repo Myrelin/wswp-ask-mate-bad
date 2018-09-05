@@ -180,7 +180,7 @@ def update_answer(cursor,answer):
         """
         UPDATE answer
         SET message = '{}' 
-        WHERE id = {}
+        WHERE id = {};
         """.format(answer['message'], answer['id'])
     )
 
@@ -198,6 +198,16 @@ def create_users_table(cursor):
     )
 
 @connection.connection_handler
+def list_users(cursor):
+    cursor.execute ("""
+        SELECT id, username, reputation, creation_date
+        FROM users
+        ORDER BY username ASC;
+    """)
+    user_list = cursor.fetchall()
+    return user_list
+
+@connection.connection_handler
 def create_user(cursor,username,password):
     pw_hash = hash.hash_password(password)
     date = datetime.now()
@@ -211,6 +221,7 @@ def create_user(cursor,username,password):
         )
     except psycopg2.IntegrityError:
         print("DASDADSADASD")
+
 
 if __name__ == "__main__":
     create_users_table()
