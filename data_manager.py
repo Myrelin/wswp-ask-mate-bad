@@ -285,7 +285,26 @@ def get_user_by_username(cursor, username):
     data = cursor.fetchone()
     return data['id']
 
+@connection.connection_handler
+def add_accepted_col(cursor):
+    cursor.execute(
+        """
+        ALTER TABLE answer
+        ADD COLUMN accepted INT DEFAULT 0
+        """
+    )
+
+@connection.connection_handler
+def accepting_answer(cursor,id):
+    cursor.execute(
+        """
+        UPDATE answer SET accepted = 1 
+        WHERE id = {};
+        """.format(id)
+
+    )
 
 if __name__ == "__main__":
-    setup_database()
-    create_user("admin","admin")
+    # setup_database()
+    # create_user("admin","admin")
+    add_accepted_col()

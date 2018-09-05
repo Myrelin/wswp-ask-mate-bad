@@ -52,8 +52,8 @@
             <div class = "vote_number">
                 Vote number: {{ item['vote_number']}}
             </div>
-            <p>
-                {% if session['user_id'] == answers_for_question[0]['user_id'] %}
+
+            {% if session['user_id'] == answers_for_question[0]['user_id'] %}
                 <div class = "delete">
                 <form action="/answer/{{ item['id'] }}/delete">
                         <input type="submit" value="Delete">
@@ -64,17 +64,22 @@
                         <input type="submit" value="Edit">
                     </form>
                 </div>
-                {% endif %}
-                <div class = "voting">
-                   <form action="/question/{{ item['id'] }}/vote/up/no">
-                        <input type="submit" value="Upvote">
-                    </form>
-                    <form action="/question/{{ item['id'] }}/vote/dwn/no">
-                        <input type="submit" value="Downvote">
-                    </form>
-                </div>
-            {% endfor%}
-            </p>
+            {% endif %}
+            <div class = "voting">
+               <form action="/question/{{ item['id'] }}/vote/up/no">
+                    <input type="submit" value="Upvote">
+                </form>
+                <form action="/question/{{ item['id'] }}/vote/dwn/no">
+                    <input type="submit" value="Downvote">
+                </form>
+            </div>
+            <div class = "accept">
+               <form action="/accept/{{ item['id'] }}">
+                    <input type="submit" value="Accept">
+                </form>
+            </div>
+        {% endfor%}
+
     <br>
     <div class = "home">
     <form action="/">
