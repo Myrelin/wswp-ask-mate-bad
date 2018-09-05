@@ -117,6 +117,13 @@ def registration():
         data_manager.create_user(data['username'],data['password'])
         return redirect('/')
 
+@app.route('/user/<user_id>', methods=['GET', 'POST'])
+def user_activities(user_id):
+    print(user_id)
+    questions_by_user = data_manager.questions_by_user(user_id)
+    answers_by_user = data_manager.answers_by_user(user_id)
+    return render_template('user.html', questions_by_user=questions_by_user, answers_by_user=answers_by_user)
+
 
 if __name__ == '__main__':
     app.run(

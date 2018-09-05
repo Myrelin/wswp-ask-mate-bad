@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <h1>Activities</h1>
+
+    <div class="table" id="question_table">
+        <table>
+            {% if questions_by_user %}
+                <th>Questions by users</th><br>
+            {% endif %}
+            <tbody>
+                <tr>
+                    <td>
+                        {% for question in questions_by_user %}
+                            <a href="/question/{{question['question_id']}}"> {{ question['message'] }} </a>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table" id="answer_table">
+        <table>
+            {% if answers_by_user %}
+                <th>Answers by users</th><br>
+            {% endif %}
+            <tbody>
+                <tr>
+                    <td>
+                        {% for answer in answers_by_user %}
+                            {{ answer['message']}}
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+{% endblock %}
