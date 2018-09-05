@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Ask Mate User List</h1>
+    <table >
+        <tr>
+            <th>Username</th>
+            <th>Reputation</th>
+            <th>Creation Date</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td><a href="/users/{{user['id']}}"> {{ user['username'] }} </a></td>
+            <td>{{ user['reputation'] }}</td>
+            <td>{{ user['creation_date'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <form action="/">
+        <div class="home">
+            <input type="submit" value="Home">
+        </div>
+    </form>
+{% endblock %}

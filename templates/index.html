@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>ASK MATE</h1>
+    <a href={{ url_for('registration') }}>registration</a>
     <h2>Latest Questions</h2>
     <table>
         <tr>
@@ -29,5 +30,9 @@
             <input type="submit" value="SEARCH">
             <br>
         </form>
-    </div>
+        <form action="/user_list">
+            <div class="user_list">
+                <input type="submit" value="All users">
+            </div>
+        </form>
 {% endblock %}
