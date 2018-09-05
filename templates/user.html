@@ -25,13 +25,13 @@
                 <th>Answers by users</th><br>
             {% endif %}
             <tbody>
-            {% for answer in answers_by_user %}
+                {% for answer in answers_by_user %}
                 <tr>
                     <td>
                         {{ answer['message']}}
                     </td>
-            </tr>
-            {% endfor %}
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
