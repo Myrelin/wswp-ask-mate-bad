@@ -20,8 +20,8 @@ def latest_five_questions():
 
 @app.route('/user_list')
 def list_of_users():
-    all_users = data_manager.list_users()
-    return render_template('user_list.html', all_users=all_users)
+    users = data_manager.list_users()
+    return render_template('user_list.html', users=users)
 
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
 def display_question(question_id):

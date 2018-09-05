@@ -196,15 +196,16 @@ def create_users_table(cursor):
         );
         """
     )
+
 @connection.connection_handler
-def list_users():
+def list_users(cursor):
     cursor.execute ("""
-    SELECT username, reputation, creation_date
-    FROM users
-    ORDER username BY ASC;
+        SELECT id, username, reputation, creation_date
+        FROM users
+        ORDER BY username ASC;
     """)
-
-
+    user_list = cursor.fetchall()
+    return user_list
 
 @connection.connection_handler
 def create_user(cursor,username,password):
@@ -220,6 +221,7 @@ def create_user(cursor,username,password):
         )
     except psycopg2.IntegrityError:
         print("DASDADSADASD")
+
 
 if __name__ == "__main__":
     create_users_table()
