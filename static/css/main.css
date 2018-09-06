@@ -236,3 +236,17 @@ label {
     width: 100%;
     text-align: center;
 }
+
+#accepted_answer {
+    font-family: Georgia, serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    word-spacing: 4px;
+    color: #80787b;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-align: left;
+}

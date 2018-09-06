@@ -27,15 +27,16 @@
             <input type="submit" value="View all questions">
         </div>
     </form>
+    <form action="/user_list">
+        <div class="user_list">
+            <input type="submit" value="View all users">
+        </div>
+    </form>
     <div class="searching">
         <form action="/search" method="POST">
             <input type="text" name="query" id="query" placeholder="Search...">
             <input type="submit" value="SEARCH">
             <br>
         </form>
-        <form action="/user_list">
-            <div class="user_list">
-                <input type="submit" value="All users">
-            </div>
-        </form>
+
 {% endblock %}

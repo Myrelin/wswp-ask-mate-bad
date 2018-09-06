@@ -65,7 +65,7 @@
         </div>
         <div class="accepted">
             {% if item['accepted'] %}
-                <span> This answer is accepted </span> <span id="checkmark">&#x2714;</span>
+                <span id="accepted_answer"> This answer is accepted </span> <span id="checkmark">&#x2714;</span>
             {% endif %}
         </div>
         {% if session['user_id'] == answers_for_question[0]['user_id'] and session['login']%}
