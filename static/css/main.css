@@ -56,9 +56,10 @@ input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
 
+
 }
 table, th, td {
-    border: 1px solid black;
+    border: 2px solid #ac3b61;
 }
 
 
@@ -206,4 +207,19 @@ label {
 
 #checkmark{
     color: lawngreen;
+}
+
+#user_list {
+    width: 100%;
+    text-align: center;
+}
+
+#question_table {
+    width: 100%;
+    text-align: center;
+}
+
+#answer_table {
+    width: 100%;
+    text-align: center;
 }

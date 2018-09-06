@@ -2,10 +2,9 @@
 {% block content %}
     <h1>Activities</h1>
 
-    <div class="table" id="question_table">
-        <table>
+        <table id="question_table">
             {% if questions_by_user %}
-                <th>Questions by users</th><br>
+                <h2>Questions by {{ questions_by_user[0]['username'] }}</h2><br>
             {% endif %}
             <tbody>
                 {% for question in questions_by_user %}
@@ -17,12 +16,10 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div>
 
-    <div class="table" id="answer_table">
-        <table>
+        <table id="answer_table">
             {% if answers_by_user %}
-                <th>Answers by users</th><br>
+                <h2>Answers by {{ answers_by_user[0]['username'] }}</h2><br>
             {% endif %}
             <tbody>
                 {% for answer in answers_by_user %}
@@ -34,7 +31,7 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div>
+
 
 
 
