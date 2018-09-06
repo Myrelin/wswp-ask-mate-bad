@@ -10,7 +10,9 @@ def add_question(cursor, question):
     question['vote_number'] = 0
     question['view_number'] = 0
     cursor.execute("""INSERT INTO question (submission_time, view_number, vote_number, title, message, user_id) 
-        VALUES(%s, %s, %s, %s, %s, %s)""", (question['submission_time'], question['view_number'], question['vote_number'], question['title'], question['message'], question['user_id']))
+        VALUES(%s, %s, %s, %s, %s, %s)""", (
+        question['submission_time'], question['view_number'], question['vote_number'], question['title'],
+        question['message'], question['user_id']))
     cursor.execute("SELECT * FROM question")
     result = cursor.fetchall()
     return result
@@ -32,7 +34,8 @@ def add_answer(cursor, answer):
     answer['submission_time'] = datetime.now()
     answer['vote_number'] = 0
     cursor.execute("""INSERT INTO answer (submission_time, vote_number, question_id, message, user_id) 
-    VALUES (%s, %s, %s, %s, %s)""", (answer['submission_time'], answer['vote_number'], answer['question_id'], answer['message'], answer['user_id']))
+    VALUES (%s, %s, %s, %s, %s)""", (
+        answer['submission_time'], answer['vote_number'], answer['question_id'], answer['message'], answer['user_id']))
     cursor.execute("SELECT * FROM answer")
     result = cursor.fetchall()
     return result
@@ -54,6 +57,7 @@ def get_all_question(cursor):
                     """)
     questions = cursor.fetchall()
     return questions
+
 
 @connection.connection_handler
 def data_sort_by_atr(cursor, atr, ascend):
@@ -126,7 +130,7 @@ def delete_questions(cursor, question_id):
 
 
 @connection.connection_handler
-def delete_answer(cursor,answer_id):
+def delete_answer(cursor, answer_id):
     cursor.execute("""
                         DELETE FROM answer
                         WHERE id = {};
@@ -142,9 +146,23 @@ def increase_view_number(cursor, question_id):
                     """.format(question_id))
 
 
+@connection.connection_handler
+def get_user_id_question(cursor, question_id):
+    cursor.execute("""SELECT user_id FROM question
+                    WHERE question.id = {};""".format(question_id))
+    result = cursor.fetchone()
+    return result
+
 
 @connection.connection_handler
-def voting(cursor, id, question, direction,):
+def get_user_id_answer(cursor, id):
+    cursor.execute("""SELECT user_id FROM answer
+                    WHERE answer.id = {};""".format(id))
+    result = cursor.fetchone()
+    return result
+
+@connection.connection_handler
+def voting(cursor, id, question, direction, reputation_id):
     if question:
         if direction == 'up':
             cursor.execute(
@@ -153,6 +171,12 @@ def voting(cursor, id, question, direction,):
                 WHERE id = {};
                 """.format(id)
             )
+            cursor.execute(""" UPDATE users 
+            SET reputation = reputation + 5
+            FROM question
+            WHERE users.id  = %(uid)s;
+            """, {"uid": reputation_id['user_id']})
+
         else:
             cursor.execute(
                 """
@@ -160,6 +184,12 @@ def voting(cursor, id, question, direction,):
                 WHERE id = {};
                 """.format(id)
             )
+            cursor.execute(""" 
+            UPDATE users 
+            SET reputation = reputation - 2
+            FROM question
+            WHERE users.id = %(uid)s ;
+                        """, {"uid": reputation_id['user_id']})
     else:
         if direction == 'up':
             cursor.execute(
@@ -168,6 +198,12 @@ def voting(cursor, id, question, direction,):
                 WHERE id = {};
                 """.format(id)
             )
+            cursor.execute(""" UPDATE users 
+                               SET reputation = reputation + 10
+                               FROM answer
+                               WHERE users.id = %(uid)s;
+                        """, {"uid": reputation_id['user_id']}
+                           )
         else:
             cursor.execute(
                 """
@@ -175,10 +211,16 @@ def voting(cursor, id, question, direction,):
                 WHERE id = {};
                 """.format(id)
             )
+            cursor.execute(""" UPDATE users 
+                               SET reputation = reputation - 2
+                               FROM  answer
+                               WHERE users.id = %(uid)s ;
+                        """, {"uid": reputation_id['user_id']}
+                           )
 
 
 @connection.connection_handler
-def update_answer(cursor,answer):
+def update_answer(cursor, answer):
     cursor.execute(
         """
         UPDATE answer
@@ -206,9 +248,10 @@ def setup_database(cursor):
         """
     )
 
+
 @connection.connection_handler
 def list_users(cursor):
-    cursor.execute ("""
+    cursor.execute("""
         SELECT id, username, reputation, creation_date
         FROM users
         ORDER BY username ASC;
@@ -216,8 +259,9 @@ def list_users(cursor):
     user_list = cursor.fetchall()
     return user_list
 
+
 @connection.connection_handler
-def create_user(cursor,username,password):
+def create_user(cursor, username, password):
     pw_hash = hash.hash_password(password)
     date = datetime.now()
     try:
@@ -226,12 +270,11 @@ def create_user(cursor,username,password):
             INSERT INTO users (username, pw_hash, creation_date)
             VALUES (%s,%s,%s)
             
-            """,(username, pw_hash, date)
+            """, (username, pw_hash, date)
         )
         return True
     except psycopg2.IntegrityError:
         return False
-
 
 
 @connection.connection_handler
