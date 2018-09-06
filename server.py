@@ -97,10 +97,12 @@ def answer_delete(answer_id):
 @app.route('/question/<id>/vote/<direction>/<question>')
 def vote(id, direction, question):
     if question == 'yes':
-        data_manager.voting(id, True, direction)
+        reputation_id_question = data_manager.get_user_id_question(id)
+        data_manager.voting(id, True, direction, reputation_id_question)
         return redirect('/question/{}'.format(id))
     else:
-        data_manager.voting(id, False, direction)
+        reputation_id_answer = data_manager.get_user_id_answer(id)
+        data_manager.voting(id, False, direction, reputation_id_answer)
         answer = data_manager.get_answer_by_id(id)
         return redirect('/question/{}'.format(answer[0]['question_id']))
 
