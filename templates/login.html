@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
+    <div class="login2"></div>
     <form method='POST' action={{ url_for('login') }}>
         <p>Username</p><br>
         <input type="text" id="username" placeholder="username" name="username"><br>
@@ -7,6 +8,7 @@
         <input type="password" id="password" placeholder="password" name="password"><br>
         <input type="submit" value="login"><br>
     </form>
+    </div>
     <div class="home">
         <form action="/">
             <input type="submit" value="Home">

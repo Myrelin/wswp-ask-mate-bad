@@ -1,7 +1,9 @@
-body {
-    background-color: #e1f2fe;
-    background-image: url("background3.jpg");
-    color: #454851;
+html {
+    background: url(background3.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .home {
@@ -50,26 +52,53 @@ h3 {
     text-align: center;
 }
 
+.login, .login2 {
+    font-family: Fira Sans, sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+
+}
+
 input[type=submit] {
     background-color: #ede6e3;
     color: #1968dd;
     padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 17px;
     cursor: pointer;
 
 }
 
 table, th, td {
-    border: 3px solid #e7eef3
+    border: 3px solid #e7eef3;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .give_answer {
     text-align: center;
 }
 
+.questionbtn {
+    text-align: right;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: inline-block;
+    float: left;
+}
+
+.edit {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+
 .searching {
     text-align: right;
+    padding-bottom: 20px;
+    display: inline-block;
+    float: right;
 }
 
 .submission {
@@ -88,7 +117,7 @@ table, th, td {
 }
 
 .username {
-    font-family: Georgia, serif;
+    font-family: Fira Sans, sans-serif;
     font-size: 15px;
     letter-spacing: 3px;
     word-spacing: 4px;
@@ -149,6 +178,8 @@ table, th, td {
 }
 
 .voting {
+    padding-top: 15px;
+    padding-bottom: 10px;
     font-size: 15px;
     text-align: right;
 }
@@ -189,7 +220,14 @@ th {
 }
 
 .content-wrapper {
-    padding: 10%;
+    padding: 2px;
+    margin: 70px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+:visited {
+    color: #beb9ff;
 }
 
 label {
@@ -225,6 +263,7 @@ label {
 #user_list {
     width: 100%;
     text-align: center;
+    padding-bottom: 5px;
 }
 
 #question_table {
@@ -238,15 +277,21 @@ label {
 }
 
 #accepted_answer {
-    font-family: Georgia, serif;
+    font-family: Fira Sans, sans-serif;;
     font-size: 15px;
     letter-spacing: 3px;
     word-spacing: 4px;
-    color: #80787b;
+    color: #e1f2fe;
     font-weight: normal;
     text-decoration: none;
     font-style: normal;
     font-variant: normal;
     text-transform: none;
     text-align: left;
+}
+
+.allquestion {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: inline-block;
 }

@@ -2,8 +2,10 @@
 {% block content %}
     <h1>ASK MATE</h1>
     {% if not session['login'] %}
+        <div class="login">
         <a href={{ url_for('registration') }}>Sign up</a>
         <a href="{{ url_for('login') }}">Log in</a>
+        </div>
     {% endif %}
     <h2>Latest Questions</h2>
     <table>
@@ -24,21 +26,23 @@
     </table>
     {% if session['login'] %}
         <form action={{ url_for('add_question') }} method='GET'>
-        <div>
+        <div class="leftbuttons">
             <input type="submit" value="Ask a question">
         </div>
     {% endif %}
 </form>
-    <form action={{ url_for('route_home') }} method='GET'>
-        <div>
-            <input type="submit" value="View all questions">
-        </div>
-    </form>
-    <form action="/user_list">
-        <div class="user_list">
-            <input type="submit" value="View all users">
-        </div>
-    </form>
+    <div class="leftbuttons">
+        <form action={{ url_for('route_home') }} method='GET'>
+            <div class="allquestion">
+                <input type="submit" value="View all questions">
+            </div>
+        </form>
+        <form action="/user_list">
+            <div class="user_list">
+                <input type="submit" value="View all users">
+            </div>
+        </form>
+    </div>
     <div class="searching">
         <form action="/search" method="POST">
             <input type="text" name="query" id="query" placeholder="Search...">
