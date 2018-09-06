@@ -203,3 +203,7 @@ label {
 .form_title {
     text-align: center;
 }
+
+#checkmark{
+    color: lawngreen;
+}

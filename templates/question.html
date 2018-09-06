@@ -52,7 +52,11 @@
             <div class = "vote_number">
                 Vote number: {{ item['vote_number']}}
             </div>
-
+            {% if item['accepted'] %}
+                <div class = "accepted">
+                    <span> This answer is accepted </span> <span id="checkmark">&#x2714;</span>
+                </div>
+            {% endif %}
             {% if session['user_id'] == answers_for_question[0]['user_id'] %}
                 <div class = "delete">
                 <form action="/answer/{{ item['id'] }}/delete">
@@ -73,11 +77,13 @@
                     <input type="submit" value="Downvote">
                 </form>
             </div>
-            <div class = "accept">
-               <form action="/accept/{{ item['id'] }}">
-                    <input type="submit" value="Accept">
-                </form>
-            </div>
+            {% if not item['accepted'] and session['user_id'] == item['user_id'] %}
+                <div class = "accept">
+                   <form action="/accept/{{ item['id'] }}">
+                        <input type="submit" value="Accept">
+                    </form>
+                </div>
+            {% endif %}
         {% endfor%}
 
     <br>

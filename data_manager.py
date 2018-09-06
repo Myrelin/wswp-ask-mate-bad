@@ -290,7 +290,7 @@ def add_accepted_col(cursor):
     cursor.execute(
         """
         ALTER TABLE answer
-        ADD COLUMN accepted INT DEFAULT 0
+        ADD COLUMN accepted BOOLEAN DEFAULT FALSE NOT NULL 
         """
     )
 
@@ -298,9 +298,9 @@ def add_accepted_col(cursor):
 def accepting_answer(cursor,id):
     cursor.execute(
         """
-        UPDATE answer SET accepted = 1 
-        WHERE id = {};
-        """.format(id)
+        UPDATE answer SET accepted = TRUE 
+        WHERE id = %(answer_id)s;
+        """, {"answer_id": id}
 
     )
 

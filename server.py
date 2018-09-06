@@ -153,8 +153,10 @@ def logout():
 
 @app.route('/accept/<answer_id>')
 def accept(answer_id):
+    answer = data_manager.get_answer_by_id(answer_id)
+    question_id = (answer[0]['question_id'])
     data_manager.accepting_answer(answer_id)
-    return redirect('/')
+    return redirect('/question/{}'.format(question_id))
 
 
 if __name__ == '__main__':
