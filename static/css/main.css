@@ -85,6 +85,20 @@ table, th, td {
 
 }
 
+.username {
+    font-family: Georgia, serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    word-spacing: 4px;
+    color: #bab2b5;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: italic;
+    font-variant: normal;
+    text-transform: none;
+    text-align: left;
+}
+
 .vote_number {
     font-family: Georgia, serif;
     font-size: 15px;
@@ -96,8 +110,7 @@ table, th, td {
     font-style: normal;
     font-variant: normal;
     text-transform: none;
-    text-align: right;
-
+    text-align: left;
 }
 
 .view_number {

@@ -2,6 +2,11 @@
 {% block content %}
 
     <h1>{{ data_question[0]['title'] }}</h1>
+        <div class = "username">
+                {{ data_question[0]['username'] }}
+                ({{ data_question[0]['reputation'] }})
+        </div>
+
         <div class = "submission">
             <p>Submission time {{ data_question[0]['submission_time']}}</p>
         </div>
@@ -43,6 +48,10 @@
     <h1>Answers</h1>
 
         {% for item in answers_for_question %}
+            <div class = "username">
+                {{ item['username'] }}
+                ({{ item['reputation'] }})
+            </div>
             <div class = "submission">
                 {{ item['submission_time']}}
             </div><br>

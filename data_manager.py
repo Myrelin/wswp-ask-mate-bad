@@ -87,7 +87,11 @@ def get_all_answers(cursor):
 @connection.connection_handler
 def get_question_by_id(cursor, question_id):
     cursor.execute("""
-                    SELECT * FROM question WHERE id={};
+                    SELECT question.id, question.submission_time, question.view_number, question.vote_number, question.title,
+                    question.message, question.user_id, users.username, users.reputation
+                    FROM question
+                    INNER JOIN users ON question.user_id = users.id
+                    WHERE question.id={};
                     """.format(question_id))
     question = cursor.fetchall()
     return question
@@ -105,8 +109,10 @@ def get_answer_by_id(cursor, id):
 @connection.connection_handler
 def get_answers_for_question(cursor, question_id):
     cursor.execute("""
-                    SELECT * FROM answer 
-                    WHERE question_id={}
+                    SELECT answer.id, answer.submission_time, answer.vote_number, answer.question_id,
+                     answer.message, answer.user_id, users.username, users.reputation FROM answer 
+                     INNER JOIN users ON answer.user_id = users.id
+                    WHERE answer.question_id={}
                     ORDER BY id ASC;
                     """.format(question_id))
     answers = cursor.fetchall()
