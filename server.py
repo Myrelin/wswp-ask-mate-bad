@@ -6,13 +6,14 @@ import data_manager
 app = Flask(__name__)
 app.secret_key = os.urandom(12)
 
-@app.route('/login',methods=['GET','POST'])
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         return render_template('login.html')
     else:
         user_data = request.form
-        if not (data_manager.check_login(user_data['username'],user_data['password'])):
+        if not (data_manager.check_login(user_data['username'], user_data['password'])):
             flash('Invalid user name or password or username not exists')
             return redirect('/login')
         else:
@@ -29,15 +30,18 @@ def route_home():
     questions = data_manager.get_all_question()
     return render_template('list.html', questions=questions)
 
+
 @app.route('/')
 def latest_five_questions():
     latest_questions = data_manager.display_latest_questions()
     return render_template('index.html', latest_questions=latest_questions)
 
+
 @app.route('/user_list')
 def list_of_users():
     users = data_manager.list_users()
     return render_template('user_list.html', users=users)
+
 
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
 def display_question(question_id):
@@ -117,7 +121,7 @@ def increase_view_number(id):
 def edit_answer(id):
     if request.method == 'GET':
         answer = data_manager.get_answer_by_id(id)
-        return render_template('new_answer.html',answer=answer,edit=True)
+        return render_template('new_answer.html', answer=answer, edit=True)
     else:
         answer = request.form.to_dict()
         data_manager.update_answer(answer)
@@ -130,13 +134,14 @@ def search():
     result = data_manager.search(search_data['query'])
     return render_template('search_result.html', result=result)
 
+
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
     if request.method == 'GET':
         return render_template('registration.html')
     else:
         data = request.form.to_dict()
-        create = data_manager.create_user(data['username'],data['password'])
+        create = data_manager.create_user(data['username'], data['password'])
         if not create:
             flash('Username already exists')
             return redirect('/registration')
@@ -149,6 +154,7 @@ def user_activities(user_id):
     questions_by_user = data_manager.questions_by_user(user_id)
     answers_by_user = data_manager.answers_by_user(user_id)
     return render_template('user.html', questions_by_user=questions_by_user, answers_by_user=answers_by_user)
+
 
 @app.route('/logout')
 def logout():

@@ -23,12 +23,12 @@
         {% endfor %}
     </table>
     {% if session['login'] %}
-    <form action={{ url_for('add_question') }} method='GET'>
+        <form action={{ url_for('add_question') }} method='GET'>
         <div>
             <input type="submit" value="Ask a question">
         </div>
     {% endif %}
-    </form>
+</form>
     <form action={{ url_for('route_home') }} method='GET'>
         <div>
             <input type="submit" value="View all questions">
@@ -46,9 +46,5 @@
             <br>
         </form>
     </div>
-    <form action="/user_list">
-        <div class="user_list">
-            <input type="submit" value="All users">
-        </div>
-    </form>
+
 {% endblock %}
