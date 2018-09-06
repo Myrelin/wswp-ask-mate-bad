@@ -20,8 +20,8 @@ def login():
             session['username'] = user_data['username']
             session['login'] = True
             flash('Successful login')
+            print(session)
             return redirect('/')
-        print(session)
 
 
 @app.route('/list')
