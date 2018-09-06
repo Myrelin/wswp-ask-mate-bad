@@ -2,35 +2,35 @@
 {% block content %}
     <h1>Activities</h1>
 
-        <table id="question_table">
-            {% if questions_by_user %}
-                <h2>Questions by {{ questions_by_user[0]['username'] }}</h2><br>
-            {% endif %}
-            <tbody>
-                {% for question in questions_by_user %}
-                <tr>
-                    <td>
-                        <a href="/question/{{question['question_id']}}"> {{ question['title'] }} </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <table id="question_table">
+        {% if questions_by_user %}
+            <h2>Questions by {{ questions_by_user[0]['username'] }}</h2><br>
+        {% endif %}
+        <tbody>
+        {% for question in questions_by_user %}
+            <tr>
+                <td>
+                    <a href="/question/{{ question['question_id'] }}"> {{ question['title'] }} </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-        <table id="answer_table">
-            {% if answers_by_user %}
-                <h2>Answers by {{ answers_by_user[0]['username'] }}</h2><br>
-            {% endif %}
-            <tbody>
-                {% for answer in answers_by_user %}
-                <tr>
-                    <td>
-                        {{ answer['message']}}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <table id="answer_table">
+        {% if answers_by_user %}
+            <h2>Answers by {{ answers_by_user[0]['username'] }}</h2><br>
+        {% endif %}
+        <tbody>
+        {% for answer in answers_by_user %}
+            <tr>
+                <td>
+                    {{ answer['message'] }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 
 

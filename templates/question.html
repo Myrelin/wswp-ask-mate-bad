@@ -2,96 +2,96 @@
 {% block content %}
 
     <h1>{{ data_question[0]['title'] }}</h1>
-        <div class = "submission">
-            <p>Submission time {{ data_question[0]['submission_time']}}</p>
-        </div>
-        <div class = "message">
-            <p>{{ data_question[0]['message']}}</p>
-        </div>
-            <p>
-                <div class = "view_number">
-                    Views {{ data_question[0]['view_number']}}
-                </div>
-                <div class = "vote_number">
-                Vote number {{ data_question[0]['vote_number']}}
-                </div>
-            </p>
-            <p>
-            {% if session['user_id'] == data_question[0]['user_id'] %}
-            <div class = "delete">
+    <div class="submission">
+        <p>Submission time {{ data_question[0]['submission_time'] }}</p>
+    </div>
+    <div class="message">
+        <p>{{ data_question[0]['message'] }}</p>
+    </div>
+    <p>
+    <div class="view_number">
+        Views {{ data_question[0]['view_number'] }}
+    </div>
+    <div class="vote_number">
+        Vote number {{ data_question[0]['vote_number'] }}
+    </div>
+    </p>
+    <p>
+        {% if session['user_id'] == data_question[0]['user_id'] %}
+            <div class="delete">
                 <form action="/question/{{ data_question[0]['id'] }}/delete" method="post">
                     <input type="submit" value="Delete">
                 </form>
             </div>
-            {% endif %}
-            <div class = "voting">
-                <form action="/question/{{ data_question[0]['id'] }}/vote/up/yes">
-                    <input type="submit" value="Upvote">
-                </form>
-                <form action='/question/{{ data_question[0]['id'] }}/vote/dwn/yes'>
-                    <input type="submit" value="Downvote">
-                </form>
-            </div>
-            </p>
-        <div class = "give_answer">
-            <form action="/question/{{ data_question[0]['id'] }}/new_answer", method="GET">
-                <input type="submit" value="Give an answer">
-            </form>
-        </div>
+        {% endif %}
+    <div class="voting">
+        <form action="/question/{{ data_question[0]['id'] }}/vote/up/yes">
+            <input type="submit" value="Upvote">
+        </form>
+        <form action='/question/{{ data_question[0]['id'] }}/vote/dwn/yes'>
+            <input type="submit" value="Downvote">
+        </form>
+    </div>
+    </p>
+    <div class="give_answer">
+        <form action="/question/{{ data_question[0]['id'] }}/new_answer" , method="GET">
+            <input type="submit" value="Give an answer">
+        </form>
+    </div>
 
     <br>
     <h1>Answers</h1>
 
-        {% for item in answers_for_question %}
-            <div class = "submission">
-                {{ item['submission_time']}}
-            </div><br>
-            <div class = "message">
-                {{ item['message']}}
+    {% for item in answers_for_question %}
+        <div class="submission">
+            {{ item['submission_time'] }}
+        </div><br>
+        <div class="message">
+            {{ item['message'] }}
+        </div>
+        <div class="vote_number">
+            Vote number: {{ item['vote_number'] }}
+        </div>
+        {% if item['accepted'] %}
+            <div class="accepted">
+                <span> This answer is accepted </span> <span id="checkmark">&#x2714;</span>
             </div>
-            <div class = "vote_number">
-                Vote number: {{ item['vote_number']}}
-            </div>
-            {% if item['accepted'] %}
-                <div class = "accepted">
-                    <span> This answer is accepted </span> <span id="checkmark">&#x2714;</span>
-                </div>
-            {% endif %}
-            {% if session['user_id'] == answers_for_question[0]['user_id'] %}
-                <div class = "delete">
+        {% endif %}
+        {% if session['user_id'] == answers_for_question[0]['user_id'] %}
+            <div class="delete">
                 <form action="/answer/{{ item['id'] }}/delete">
-                        <input type="submit" value="Delete">
-                    </form>
-                </div>
-                <div class = "edit">
-                    <form action="/answer/{{ item['id'] }}/edit">
-                        <input type="submit" value="Edit">
-                    </form>
-                </div>
-            {% endif %}
-            <div class = "upvote">
-               <form action="/question/{{ item['id'] }}/vote/up/no">
-                    <input type="submit" value="Upvote">
+                    <input type="submit" value="Delete">
                 </form>
             </div>
-                <div class = "downvote">
-                <form action="/question/{{ item['id'] }}/vote/dwn/no">
-                    <input type="submit" value="Downvote">
+            <div class="edit">
+                <form action="/answer/{{ item['id'] }}/edit">
+                    <input type="submit" value="Edit">
                 </form>
             </div>
-            {% if not item['accepted'] and session['user_id'] == item['user_id'] %}
-                <div class = "accept">
-                   <form action="/accept/{{ item['id'] }}">
-                        <input type="submit" value="Accept">
-                    </form>
-                </div>
-            {% endif %}
-        {% endfor%}
+        {% endif %}
+        <div class="upvote">
+            <form action="/question/{{ item['id'] }}/vote/up/no">
+                <input type="submit" value="Upvote">
+            </form>
+        </div>
+        <div class="downvote">
+            <form action="/question/{{ item['id'] }}/vote/dwn/no">
+                <input type="submit" value="Downvote">
+            </form>
+        </div>
+        {% if not item['accepted'] and session['user_id'] == item['user_id'] %}
+            <div class="accept">
+                <form action="/accept/{{ item['id'] }}">
+                    <input type="submit" value="Accept">
+                </form>
+            </div>
+        {% endif %}
+    {% endfor %}
 
     <br>
-    <div class = "home">
-    <form action="/">
-        <input type="submit" value="Home">
-    </form>
+    <div class="home">
+        <form action="/">
+            <input type="submit" value="Home">
+        </form>
     </div>
 {% endblock %}

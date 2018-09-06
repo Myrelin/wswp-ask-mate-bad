@@ -8,11 +8,11 @@
             <th>Creation Date</th>
         </tr>
         {% for user in users %}
-        <tr>
-            <td><a href="/user/{{user['id']}}"> {{ user['username'] }} </a></td>
-            <td>{{ user['reputation'] }}</td>
-            <td>{{ user['creation_date'] }}</td>
-        </tr>
+            <tr>
+                <td><a href="/user/{{ user['id'] }}"> {{ user['username'] }} </a></td>
+                <td>{{ user['reputation'] }}</td>
+                <td>{{ user['creation_date'] }}</td>
+            </tr>
         {% endfor %}
     </table>
     <form action="/">
