@@ -2,8 +2,8 @@
 {% block content %}
     <h1>ASK MATE</h1>
     {% if not session['login'] %}
-    <a href={{ url_for('registration') }}>SIGN UP</a>
-    <a href="{{ url_for('login') }}">LOG IN</a>
+        <a href={{ url_for('registration') }}>Sign up</a>
+        <a href="{{ url_for('login') }}">Log in</a>
     {% endif %}
     <h2>Latest Questions</h2>
     <table>
@@ -14,12 +14,12 @@
             <th>Vote number</th>
         </tr>
         {% for question in latest_questions %}
-        <tr>
-            <td>{{ question['submission_time'] }}</td>
-            <td><a href="/question/{{question['id']}}"> {{ question['title'] }} </a></td>
-            <td>{{ question['view_number'] }}</td>
-            <td>{{ question['vote_number'] }}</td>
-        </tr>
+            <tr>
+                <td>{{ question['submission_time'] }}</td>
+                <td><a href="/question/{{ question['id'] }}"> {{ question['title'] }} </a></td>
+                <td>{{ question['view_number'] }}</td>
+                <td>{{ question['vote_number'] }}</td>
+            </tr>
         {% endfor %}
     </table>
     <form action={{ url_for('route_home') }} method='GET'>
@@ -30,9 +30,10 @@
     <div class="searching">
         <form action="/search" method="POST">
             <input type="text" name="query" id="query" placeholder="Search...">
-            <input type="submit" value="Search">
+            <input type="submit" value="SEARCH">
             <br>
         </form>
+    </div>
         <form action="/user_list">
             <div class="user_list">
                 <input type="submit" value="All users">
