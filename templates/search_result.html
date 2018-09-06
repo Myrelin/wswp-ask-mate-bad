@@ -7,16 +7,16 @@
 
     <table id="search_result">
         {% for element in result %}
-        <tr>
-            <td><a href="/question/{{ element['id'] }}">{{ element['title'] }}</a></td>
-        </tr>
+            <tr>
+                <td><a href="/question/{{ element['id'] }}">{{ element['title'] }}</a></td>
+            </tr>
         {% endfor %}
     </table>
 
     <br>
-    <div class = "home">
+    <div class="home">
         <form action="/">
-            <input type="submit" value="HOME">
+            <input type="submit" value="Home>
         </form>
     </div>
 
