@@ -113,7 +113,7 @@ def get_answer_by_id(cursor, id):
 @connection.connection_handler
 def get_answers_for_question(cursor, question_id):
     cursor.execute("""
-                    SELECT answer.id, answer.submission_time, answer.vote_number, answer.question_id,
+                    SELECT answer.id, answer.submission_time, answer.vote_number, answer.question_id ,answer.accepted,
                      answer.message, answer.user_id, users.username, users.reputation FROM answer 
                      INNER JOIN users ON answer.user_id = users.id
                     WHERE answer.question_id={}

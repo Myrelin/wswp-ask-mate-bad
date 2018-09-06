@@ -38,55 +38,57 @@
                 </form>
             </div>
             </p>
-        <div class = "give_answer">
-            <form action="/question/{{ data_question[0]['id'] }}/new_answer", method="GET">
-                <input type="submit" value="Give an answer">
-            </form>
-        </div>
+        {% if session['login'] %}
+            <div class = "give_answer">
+                <form action="/question/{{ data_question[0]['id'] }}/new_answer", method="GET">
+                    <input type="submit" value="Give an answer">
+                </form>
+            </div>
+        {% endif %}
 
     <br>
     <h1>Answers</h1>
 
-        {% for item in answers_for_question %}
-            <div class = "username">
-                {{ item['username'] }}
-                ({{ item['reputation'] }})
-            </div>
-            <div class = "submission">
-                {{ item['submission_time']}}
-            </div><br>
-            <div class = "message">
-                {{ item['message']}}
-            </div>
-            <div class = "vote_number">
-                Vote number: {{ item['vote_number']}}
-            </div>
+    {% for item in answers_for_question %}
+        <div class = "username">
+            {{ item['username'] }}
+            ({{ item['reputation'] }})
+        </div>
+        <div class = "submission">
+            {{ item['submission_time']}}
+        </div><br>
+        <div class = "message">
+            {{ item['message']}}
+        </div>
+        <div class = "vote_number">
+            Vote number: {{ item['vote_number']}}
+        </div>
+        <div class="accepted">
             {% if item['accepted'] %}
-                <div class = "accepted">
-                    <span> This answer is accepted </span> <span id="checkmark">&#x2714;</span>
-                </div>
+                <span> This answer is accepted </span> <span id="checkmark">&#x2714;</span>
             {% endif %}
-            {% if session['user_id'] == answers_for_question[0]['user_id'] %}
-                <div class = "delete">
+        </div>
+        {% if session['user_id'] == answers_for_question[0]['user_id'] and session['login']%}
+            <div class = "delete">
                 <form action="/answer/{{ item['id'] }}/delete">
-                        <input type="submit" value="Delete">
-                    </form>
-                </div>
-                <div class = "edit">
-                    <form action="/answer/{{ item['id'] }}/edit">
-                        <input type="submit" value="Edit">
-                    </form>
-                </div>
-            {% endif %}
-            <div class = "voting">
-               <form action="/question/{{ item['id'] }}/vote/up/no">
-                    <input type="submit" value="Upvote">
-                </form>
-                <form action="/question/{{ item['id'] }}/vote/dwn/no">
-                    <input type="submit" value="Downvote">
+                    <input type="submit" value="Delete">
                 </form>
             </div>
-            {% if not item['accepted'] and session['user_id'] == data_question[0]['user_id'] %}
+            <div class = "edit">
+                <form action="/answer/{{ item['id'] }}/edit">
+                    <input type="submit" value="Edit">
+                </form>
+            </div>
+        {% endif %}
+        <div class = "voting">
+            <form action="/question/{{ item['id'] }}/vote/up/no">
+                <input type="submit" value="Upvote">
+            </form>
+            <form action="/question/{{ item['id'] }}/vote/dwn/no">
+                <input type="submit" value="Downvote">
+            </form>
+        </div>
+        {% if not item['accepted'] and session['user_id'] == data_question[0]['user_id'] %}
                 <div class = "accept">
                    <form action="/accept/{{ item['id'] }}">
                         <input type="submit" value="Accept">
