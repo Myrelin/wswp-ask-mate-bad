@@ -1,6 +1,7 @@
 body {
-    background-color: #eee2dc;
-    color: #07113f;
+    background-color: #e1f2fe;
+    background-image: url("background3.jpg");
+    color: #454851;
 }
 
 .home {
@@ -8,11 +9,11 @@ body {
 }
 
 h1 {
-    font-family: Georgia, serif;
+    font-family: Fira Sans, sans-serif;
     font-size: 45px;
     letter-spacing: 4px;
     word-spacing: 5px;
-    color: #ac3b61;
+    color: #e1f2fe;
     font-weight: bold;
     text-decoration: none;
     font-style: normal;
@@ -22,11 +23,11 @@ h1 {
 }
 
 h2 {
-    font-family: Georgia, serif;
-    font-size: 25px;
+    font-family: Fira Sans, sans-serif;
+    font-size: 30px;
     letter-spacing: 3px;
     word-spacing: 4px;
-    color: #123c69;
+    color: #e1f2fe;
     font-weight: normal;
     text-decoration: none;
     font-style: normal;
@@ -36,11 +37,11 @@ h2 {
 }
 
 h3 {
-    font-family: Georgia, serif;
-    font-size: 25px;
+    font-family: Fira Sans, sans-serif;
+    font-size: 30px;
     letter-spacing: 3px;
     word-spacing: 4px;
-    color: #123c69;
+    color: #e1f2fe;
     font-weight: normal;
     text-decoration: none;
     font-style: normal;
@@ -49,8 +50,8 @@ h3 {
     text-align: center;
 }
 input[type=submit] {
-  background-color: #edc7b7;
-  color: #ac3b61;
+  background-color: #ede6e3;
+  color: #1968dd;
   padding: 12px 20px;
   border: none;
   border-radius: 4px;
@@ -59,7 +60,7 @@ input[type=submit] {
 
 }
 table, th, td {
-    border: 2px solid #ac3b61;
+    border: 3px solid #e7eef3
 }
 
 
@@ -72,11 +73,11 @@ table, th, td {
 }
 
 .submission {
-    font-family: Georgia, serif;
-    font-size: 15px;
+    font-family: Fira Sans, sans-serif;
+    font-size: 20px;
     letter-spacing: 3px;
     word-spacing: 4px;
-    color: #bab2b5;
+    color: #e1f2fe;
     font-weight: normal;
     text-decoration: none;
     font-style: italic;
@@ -87,11 +88,11 @@ table, th, td {
 }
 
 .vote_number {
-    font-family: Georgia, serif;
+    font-family: Fira Sans, sans-serif;
     font-size: 15px;
     letter-spacing: 3px;
     word-spacing: 4px;
-    color: #bab2b5;
+    color: #e1f2fe;
     font-weight: normal;
     text-decoration: none;
     font-style: normal;
@@ -102,11 +103,11 @@ table, th, td {
 }
 
 .view_number {
-    font-family: Georgia, serif;
+    font-family: Fira Sans, sans-serif;
     font-size: 15px;
     letter-spacing: 3px;
     word-spacing: 4px;
-    color: #bab2b5;
+    color: #77625c;
     font-weight: normal;
     text-decoration: none;
     font-style: normal;
@@ -116,11 +117,11 @@ table, th, td {
 }
 
 .message {
-    font-family: Georgia, serif;
+    font-family: Fira Sans, sans-serif;
     font-size: 20px;
     letter-spacing: 3px;
     word-spacing: 4px;
-    color: #123c69;
+    color: #77625c;
     font-weight: normal;
     text-decoration: none;
     font-style: normal;
@@ -142,11 +143,11 @@ table, th, td {
 
 table {
     border-collapse: collapse;
-    font-family: Georgia, serif;
+    font-family: Fira Sans, sans-serif;
     font-size: 23px;
     letter-spacing: 4px;
     word-spacing: 5px;
-    color: #000000;
+    color: #e1f2fe;
     font-weight: normal;
     text-decoration: none;
     font-style: normal;
@@ -163,11 +164,11 @@ table {
 
 th {
     text-align: center;
-    font-family: Georgia, serif;
+    font-family: Fira Sans, sans-serif;
     font-size: 20px;
     letter-spacing: 3px;
     word-spacing: 4px;
-    color: #000000;
+    color: #e1f2fe;
     font-weight: normal;
     text-decoration: none;
     font-style: normal;
@@ -180,11 +181,11 @@ th {
 }
 
 label {
-    font-family: Georgia, serif;
+    font-family: Fira Sans, sans-serif;
     font-size: 25px;
     letter-spacing: 3px;
     word-spacing: 4px;
-    color: #123c69;
+    color: #454851;
     font-weight: normal;
     text-decoration: none;
     font-style: normal;

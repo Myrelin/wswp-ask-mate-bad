@@ -10,7 +10,7 @@
         </div>
             <p>
                 <div class = "view_number">
-                    View number {{ data_question[0]['view_number']}}
+                    Views {{ data_question[0]['view_number']}}
                 </div>
                 <div class = "vote_number">
                 Vote number {{ data_question[0]['vote_number']}}
@@ -69,10 +69,12 @@
                     </form>
                 </div>
             {% endif %}
-            <div class = "voting">
+            <div class = "upvote">
                <form action="/question/{{ item['id'] }}/vote/up/no">
                     <input type="submit" value="Upvote">
                 </form>
+            </div>
+                <div class = "downvote">
                 <form action="/question/{{ item['id'] }}/vote/dwn/no">
                     <input type="submit" value="Downvote">
                 </form>
@@ -89,7 +91,7 @@
     <br>
     <div class = "home">
     <form action="/">
-        <input type="submit" value="HOME">
+        <input type="submit" value="Home">
     </form>
     </div>
 {% endblock %}
