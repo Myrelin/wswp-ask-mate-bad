@@ -1,6 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>ASK MATE</h1>
+    {% if not session['login'] %}
+        <div class="login">
+        <a href={{ url_for('registration') }}>Sign up</a>
+        <a href="{{ url_for('login') }}">Log in</a>
+        </div>
+    {% endif %}
     <h2>Latest Questions</h2>
     <table>
         <tr>
@@ -10,19 +16,33 @@
             <th>Vote number</th>
         </tr>
         {% for question in latest_questions %}
-        <tr>
-            <td>{{ question['submission_time'] }}</td>
-            <td><a href="/question/{{question['id']}}"> {{ question['title'] }} </a></td>
-            <td>{{ question['view_number'] }}</td>
-            <td>{{ question['vote_number'] }}</td>
-        </tr>
+            <tr>
+                <td>{{ question['submission_time'] }}</td>
+                <td><a href="/question/{{ question['id'] }}"> {{ question['title'] }} </a></td>
+                <td>{{ question['view_number'] }}</td>
+                <td>{{ question['vote_number'] }}</td>
+            </tr>
         {% endfor %}
     </table>
-    <form action={{ url_for('route_home') }} method='GET'>
-        <div>
-            <input type="submit" value="View all questions">
+    {% if session['login'] %}
+        <form action={{ url_for('add_question') }} method='GET'>
+        <div class="leftbuttons">
+            <input type="submit" value="Ask a question">
         </div>
-    </form>
+    {% endif %}
+</form>
+    <div class="leftbuttons">
+        <form action={{ url_for('route_home') }} method='GET'>
+            <div class="allquestion">
+                <input type="submit" value="View all questions">
+            </div>
+        </form>
+        <form action="/user_list">
+            <div class="user_list">
+                <input type="submit" value="View all users">
+            </div>
+        </form>
+    </div>
     <div class="searching">
         <form action="/search" method="POST">
             <input type="text" name="query" id="query" placeholder="Search...">
@@ -30,4 +50,5 @@
             <br>
         </form>
     </div>
+
 {% endblock %}

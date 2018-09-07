@@ -17,10 +17,13 @@
         </tr>
         {% endfor %}
     </table>
-    <form action={{ url_for('add_question') }} method='GET'>
-        <div>
-            <input type="submit" value="Ask a question">
-        </div>
+    {% if session['login'] %}
+        <form action={{ url_for('add_question') }} method='GET'>
+            <div>
+                <input type="submit" value="Ask a question">
+            </div>
+        </form>
+    {% endif %}
     </form>
     <form action="/">
         <div class="home">
